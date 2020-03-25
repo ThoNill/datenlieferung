@@ -1,0 +1,12 @@
+[ req ]
+default_bits        = 2048
+distinguished_name  = Name
+req_extensions      = san
+extensions          = san
+[ req_distinguished_name ]
+countryName         = DE
+stateOrProvinceName = Bundesland
+localityName        = Ort
+organizationName    = Organisation
+[ san ]
+subjectAltName      = DNS:localhost

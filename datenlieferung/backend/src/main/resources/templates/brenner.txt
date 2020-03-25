@@ -1,0 +1,2 @@
+[(${id})];[(${empf_ik})];[(${empf_firma})];[(${cdnr})];[(${erstellt})];[(${monat})];[(${jahr})];[(${physDateiname})]
+[(${id})];[(${empf_ik})];[(${empf_firma})];[(${cdnr})];[(${erstellt})];[(${monat})];[(${jahr})];[(${physDateiname})].AUF

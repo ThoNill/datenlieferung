@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>tho.nill</groupId>
+	<artifactId>datenlieferung</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>demo</name>
+	<description>Datenlieferungen for Spring Boot</description>
+
+
+	<parent>
+
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<!-- <version>2.1.6.RELEASE</version> -->
+		<version>2.1.7.RELEASE</version>
+		<relativePath /> <!-- lookup parent from repository -->
+	</parent>
+
+	<properties>
+		<ssh.version>2.3.0</ssh.version> <!-- 0.10.1 -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>11</java.version>
+		<lombok.version>1.18.8</lombok.version>
+		<spring-boot-admin.version>2.1.5</spring-boot-admin.version>
+	</properties>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>tho.nill</groupId>
+			<artifactId>datenlieferungModell</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>tho.nill</groupId>
+			<artifactId>Vorlagen-maven-plugin</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-rest</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-hateoas</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jdbc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-integration</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.integration</groupId>
+			<artifactId>spring-integration-mail</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web-services</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-webflux</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>de.codecentric</groupId>
+			<artifactId>spring-boot-admin-starter-client</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>de.codecentric</groupId>
+			<artifactId>spring-boot-admin-starter-server</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.session</groupId>
+			<artifactId>spring-session-jdbc</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.derby</groupId>
+			<artifactId>derby</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.projectreactor</groupId>
+			<artifactId>reactor-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+
+		<dependency>
+			<!-- <groupId>com.hierynomus</groupId> <artifactId>sshj</artifactId> <version>0.27.0</version> -->
+			<groupId>net.schmizz</groupId>
+			<artifactId>sshj</artifactId>
+			<version>0.10.0</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.bouncycastle</groupId>
+					<artifactId>bcpkix-jdk15on</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.bouncycastle</groupId>
+					<artifactId>bcprov-jdk15on</artifactId>
+				</exclusion>
+
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>bouncy</groupId>
+			<artifactId>cms</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.jcraft.tho.nill</groupId>
+			<artifactId>jsch</artifactId>
+			<version>0.1.54</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.apache.sshd</groupId>
+			<artifactId>sshd-core</artifactId>
+			<version>${ssh.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.sshd</groupId>
+			<artifactId>sshd-sftp</artifactId>
+			<version>2.3.0</version>
+
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-vfs2</artifactId>
+			<version>2.4</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>com.icegreen</groupId>
+			<artifactId>greenmail</artifactId>
+			<version>1.5.10</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.icegreen</groupId>
+			<artifactId>greenmail-spring</artifactId>
+			<version>1.5.10</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/commons-httpclient/commons-httpclient -->
+		<dependency>
+			<groupId>commons-httpclient</groupId>
+			<artifactId>commons-httpclient</artifactId>
+			<version>3.1</version>
+		</dependency>
+
+
+	</dependencies>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>de.codecentric</groupId>
+				<artifactId>spring-boot-admin-dependencies</artifactId>
+				<version>${spring-boot-admin.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	<build>
+		<pluginManagement>
+			<plugins>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.8.1</version>
+					<configuration>
+						<source>${java.version}</source>
+						<target>${java.version}</target>
+						<annotationProcessorPaths>
+							<path>
+								<groupId>org.projectlombok</groupId>
+								<artifactId>lombok</artifactId>
+								<version>${lombok.version}</version>
+							</path>
+						</annotationProcessorPaths>
+						<!-- <compilerArgs> <arg>-sourcepath</arg> <arg>${project.basedir}/src/main/java${path.separator}${project.basedir}/target/generated-sources/annotations${path.separator}/</arg> 
+							</compilerArgs> -->
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>tho.nill</groupId>
+					<artifactId>Vorlagen-maven-plugin</artifactId>
+					<version>0.0.1-SNAPSHOT</version>
+					<extensions>true</extensions>
+					<inherited>true</inherited>
+					<dependencies>
+						<dependency>
+							<groupId>tho.nill</groupId>
+							<artifactId>datenlieferungModell</artifactId>
+							<version>0.0.1-SNAPSHOT</version>
+						</dependency>
+
+						<dependency>
+							<groupId>tho.nill</groupId>
+							<artifactId>datenlieferungModell</artifactId>
+							<version>0.0.1-SNAPSHOT</version>
+							<classifier>sources</classifier>
+						</dependency>
+
+					</dependencies>
+					<executions>
+						<execution>
+							<id>id2</id>
+							<phase>generate-sources</phase>
+
+							<configuration>
+								<doNothing>true</doNothing>
+
+								<sourceJarPaths>
+									<sourceJarPath>${settings.localRepository}\tho\nill\datenlieferungModell\0.0.1-SNAPSHOT\datenlieferungModell-0.0.1-SNAPSHOT-sources.jar</sourceJarPath>
+								</sourceJarPaths>
+								<modellDir>../datenlieferungModell/src/main/java</modellDir>
+								<templateDir>entity/single</templateDir>
+								<outputDir>backend/src/main/java</outputDir>
+								<modelClasses>
+									<!-- <modelClass>tho.nill.datenlieferung.modelle.Zertifikat</modelClass> 
+										<modelClass>tho.nill.datenlieferung.modelle.Datenlieferung</modelClass> <modelClass>tho.nill.datenlieferung.modelle.PrivateKey</modelClass> 
+										<modelClass>tho.nill.datenlieferung.modelle.DateiNummer</modelClass> <modelClass>tho.nill.datenlieferung.modelle.DatenlieferungProtokoll</modelClass> 
+										<modelClass>tho.nill.datenlieferung.modelle.RechnungAuftrag</modelClass> 
+										<modelClass>tho.nill.datenlieferung.modelle.RechnungsGruppierung</modelClass> 
+										<modelClass>tho.nill.datenlieferung.modelle.EingangText</modelClass> <modelClass>tho.nill.datenlieferung.modelle.Datenlieferung</modelClass> 
+										<modelClass>tho.nill.datenlieferung.modelle.EingeleseneDatei</modelClass> 
+										<modelClass>tho.nill.datenlieferung.modelle.Datenaustausch</modelClass> -->
+
+								</modelClasses>
+								<converterClass>tho.nill.datenlieferung.simpleAttributes.Converters</converterClass>
+								<connectionClass>tho.nill.datenlieferung.verknüpfungen.Verknüpfungen</connectionClass>
+							</configuration>
+
+							<goals>
+								<goal>generateFromObjectModel</goal>
+							</goals>
+						</execution>
+
+					</executions>
+				</plugin>
+
+			</plugins>
+		</pluginManagement>
+	</build>
+	<modules>
+		<module>backend</module>
+	</modules>
+
+</project>

@@ -1,0 +1,6 @@
+ 
+ [(${datei})].AUF 348 [(${datum})]
+ 
+ [(${datei})] [(${verschl})] [(${datum})]
+ 
+ 

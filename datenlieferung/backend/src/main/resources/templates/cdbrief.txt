@@ -1,0 +1,19 @@
+                                                       IK [(${abs_ik})] [(${abs_firma})] [(${abs_ansprechpartner})]
+                                                       [(${abs_strasse})]
+	                                                   [(${abs_plz})] [(${abs_ort})]
+	
+
+
+	IK [(${abs_ik})] [(${abs_firma})] [(${abs_ansprechpartner})]
+	
+	[(${abs_strasse})]
+	[(${abs_plz})] [(${abs_ort})]
+	
+
+CD-Lieferung
+
+zu CD mit der CD Nummer [(${cdnr})]
+Erstellungsdatum: [(${erstellt})]
+
+Mit freundlichen Grüßen
+

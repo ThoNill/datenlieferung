@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>datenlieferung.backend</artifactId>
+	<packaging>jar</packaging>
+	<name>backend</name>
+	<description>The backend project</description>
+	<parent>
+		<groupId>tho.nill</groupId>
+		<artifactId>datenlieferung</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>11</java.version>
+		<spring-boot-admin.version>2.1.5</spring-boot-admin.version>
+	</properties>
+
+
+
+	<build>
+		<!-- <defaultGoal> Vorlagen:generateFromObjectModel@id2 </defaultGoal> -->
+
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>tho.nill</groupId>
+					<artifactId>Vorlagen-maven-plugin</artifactId>
+					<version>0.0.1-SNAPSHOT</version>
+					<extensions>true</extensions>
+					<inherited>false</inherited>
+					<dependencies>
+						<dependency>
+							<groupId>tho.nill</groupId>
+							<artifactId>datenlieferungModell</artifactId>
+							<version>0.0.1-SNAPSHOT</version>
+						</dependency>
+
+						<dependency>
+							<groupId>tho.nill</groupId>
+							<artifactId>datenlieferungModell</artifactId>
+							<version>0.0.1-SNAPSHOT</version>
+							<classifier>sources</classifier>
+						</dependency>
+
+					</dependencies>
+					<executions>
+						<execution>
+							<id>id2</id>
+							<phase>generate-sources</phase>
+
+							<configuration>
+								<doNothing combine.self="override">false</doNothing>
+							</configuration>
+
+							<goals>
+								<goal>generateFromObjectModel</goal>
+							</goals>
+						</execution>
+
+					</executions>
+				</plugin>
+
+				<plugin>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.8.0</version>
+					<configuration>
+					<forceJavacCompilerUse>true</forceJavacCompilerUse>
+						<release>11</release>
+						<compilerArgs>
+							<arg>-parameters</arg>
+						</compilerArgs>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+</project>

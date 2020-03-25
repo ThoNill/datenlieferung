@@ -1,0 +1,6 @@
+target/
+/derby.log
+/https.cnf.nill
+/https.p12.nill
+/generateHttpsCertificate.bat
+/generateKeyPair.bat

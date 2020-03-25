@@ -1,0 +1,30 @@
+
+
+Datenträgerbegleitzettel
+
+Datenübermittlungsverfahren [(${verfahren})]
+
+Abrechnungjahr/Monat [(${jahr})]/[(${monat})]
+Absender:
+
+	IK [(${abs_ik})] [(${abs_firma})] [(${abs_ansprechpartner})]
+	
+	[(${abs_strasse})]
+	[(${abs_plz})] [(${abs_ort})]
+	
+Empfänger:
+
+	IK [(${empf_ik})] [(${empf_firma})] [(${empf_ansprechpartner})]
+	
+	[(${empf_strasse})]
+	[(${empf_plz})] [(${empf_ort})]
+	
+
+Inhalt der Dateien: [(${spezifikation})]
+Dateinamen lt. Nachrichtenkopfsegment: [(${logDateiname})]
+physikalischer Dateiname: [(${physDateiname})]
+Art des Datenträgers:  CD
+CD Nummer [(${cdnr})]
+Erstellungsdatum: [(${erstellt})]
+
+[(${gesendet})] [(${bearb_ansprechpartner})] [(${bearb_telefon})]

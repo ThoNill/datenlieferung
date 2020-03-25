@@ -1,0 +1,10 @@
+ 
+ [(${datei})].AUF 348 [(${datum})]
+ 
+ [(${datei})] [(${verschl})] [(${datum})]
+ 
+ Absender-Firmenname [(${firmenname})]
+ Absender-Ansprechpartner [(${ansprechpartner})]
+ Absender-E-Mail-Adresse [(${email})]
+ Absender-Telefon [(${telefon})]
+ 
