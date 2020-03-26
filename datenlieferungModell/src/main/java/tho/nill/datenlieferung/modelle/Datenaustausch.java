@@ -20,27 +20,22 @@ public class Datenaustausch extends ObjectModell implements Aggregate, Entity{
 	public IK versenderIK;
 	public IK datenAnnahmeIK;
 	public IK datenPrüfungsIK;
-	
 	public Richtung richtung;
 	public DatenArt datenArt;
-	
 	public Verbindungsart verbindung;
-	
-	String host;
-	int port;
-	String hostVerzeichnis;
-	
-	String emailTo;
-	String emailFrom;
-	String loginNutzer;
-	String loginPasswort;
-	ByteBLOB loginCert;
-	String name;
-	String strasse;
-	String plz;
-	
-	String annahmeClassName;
-	String codepage;
+	public String host;
+	public int port;
+	public String hostVerzeichnis;
+	public String emailTo;
+	public String emailFrom;
+	public String loginNutzer;
+	public String loginPasswort;
+	public ByteBLOB loginCert;
+	public String name;
+	public String strasse;
+	public String plz;
+	public String annahmeClassName;
+	public String codepage;
 	
 	public String calcX() {
 		return annahmeClassName;
