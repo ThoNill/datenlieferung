@@ -1,0 +1,111 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>tho.nill</groupId>
+	<artifactId>datenlieferungModell</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>datenlieferungModell</name>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<encoding>UTF-8</encoding>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>tho.nill</groupId>
+			<artifactId>AngularSpringVorlagen</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>3.0.1</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar-no-fork</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.0</version>
+				<executions>
+					<execution>
+						<id>default-compile</id>
+						<phase>compile</phase>
+						<goals>
+							<goal>compile</goal>
+						</goals>
+						<configuration>
+							<source>${java.source.version}</source>
+							<target>${java.target.version}</target>
+							<encoding>UTF8</encoding>
+							<verbose>true</verbose>
+							<debug>true</debug>
+							<!-- <arg>-add-exports</arg> <arg>jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED 
+								jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED 
+								jdk.compiler/com.sun.tools.javac.processing=ALL-UNNAMED jdk.compiler/com.sun.source.util=ALL-UNNAMED 
+								jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED</arg> -->
+						</configuration>
+					</execution>
+					<execution>
+						<id>default-testCompile</id>
+						<phase>test-compile</phase>
+						<goals>
+							<goal>testCompile</goal>
+						</goals>
+						<configuration>
+							<source>${java.source.version}</source>
+							<target>${java.target.version}</target>
+							<encoding>UTF8</encoding>
+							<verbose>true</verbose>
+							<debug>true</debug>
+							<compilerArgs>
+								<arg>-proc:none</arg>
+								<!-- <arg>-add-modules</arg><arg>ALL-MODULE-PATH</arg> <arg>-add-exports</arg> 
+									<arg>jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED 
+									jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED jdk.compiler/com.sun.tools.javac.processing=ALL-UNNAMED 
+									jdk.compiler/com.sun.source.util=ALL-UNNAMED jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED</arg> -->
+							</compilerArgs>
+
+						</configuration>
+					</execution>
+				</executions>
+				<configuration>
+					<source>${java.source.version}</source>
+					<target>${java.target.version}</target>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.20</version>
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.maven.surefire</groupId>
+						<artifactId>surefire-junit47</artifactId>
+						<version>2.20</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+		</plugins>
+	</build>
+</project>
