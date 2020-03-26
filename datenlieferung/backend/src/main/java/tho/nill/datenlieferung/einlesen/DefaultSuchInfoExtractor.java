@@ -13,14 +13,13 @@ public class DefaultSuchInfoExtractor implements SuchInfoExtractor {
 	Pattern pattern = Pattern.compile(
 			"[eE]([a-zA-Z]{3})([0-9]+) ([0-9]+) ([0-9]{4})([0-9]{2})([0-9]{2}):([0-9]{2})([0-9]{2})([0-9]{2})",
 			Pattern.CASE_INSENSITIVE);
-	// in case you would like to ignore case sensitivity,
 
 	@Override
 	public List<SuchInfo> extractSuchInfos(String text) {
 		List<SuchInfo> infos = new ArrayList<SuchInfo>();
 		Matcher matcher = pattern.matcher(text);
 		while (matcher.find()) {
-			int i;
+
 			String dateiname = "E" + extractGroup(text, matcher, 1) + extractGroup(text, matcher, 2);
 			long größe = Long.parseLong(extractGroup(text, matcher, 3));
 			int jahr = Integer.parseInt(extractGroup(text, matcher, 4));

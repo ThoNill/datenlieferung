@@ -48,11 +48,10 @@ public class BestätigeEingang extends Verzeichnisse implements Consumer {
 		try {
 			List<Long> datenlieferungIdList = analyse.analysieren(datei);
 			Bewertung bewertung = bewerter.bewerten(datei.getDaten().toLowerCase());
-			int fehler = 0;
 
 			if (!datenlieferungIdList.isEmpty()) {
 				for (long datenlieferungId : datenlieferungIdList) {
-					fehler = bearbeiteDatenlieferung(datei, bewertung, datenlieferungId);
+					bearbeiteDatenlieferung(datei, bewertung, datenlieferungId);
 				}
 			} else {
 				keineDateiInfoImText(datei);

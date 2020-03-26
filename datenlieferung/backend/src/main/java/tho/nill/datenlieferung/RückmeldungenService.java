@@ -79,7 +79,7 @@ public class RückmeldungenService extends BasisService<DummyVoid> {
 				throw new DatenlieferungException(protokollEMail.get().getMeldung());
 			}
 			if (protokollSftp.isPresent()) {
-				protokollRepo.saveAndFlush(protokollEMail.get());
+				protokollRepo.saveAndFlush(protokollSftp.get());
 				throw new DatenlieferungException(protokollSftp.get().getMeldung());
 			}
 		}

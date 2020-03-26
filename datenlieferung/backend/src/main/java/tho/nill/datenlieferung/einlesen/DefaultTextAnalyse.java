@@ -28,7 +28,7 @@ public class DefaultTextAnalyse implements TextAnalyse {
 
 	@Override
 	public List<Long> analysieren(@NonNull EingeleseneDatei datei) {
-		List<Long> alleIds = new ArrayList<Long>();
+		List<Long> alleIds = new ArrayList<>();
 		List<SuchInfo> infos = extractor.extractSuchInfos(datei.getDaten().toLowerCase());
 		for (SuchInfo info : infos) {
 			alleIds.add(bestimmeDatenlieferungIdZurInfo(datei, info));

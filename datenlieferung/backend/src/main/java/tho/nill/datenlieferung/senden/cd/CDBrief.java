@@ -1,7 +1,6 @@
 package tho.nill.datenlieferung.senden.cd;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -67,7 +66,7 @@ public class CDBrief extends Beleg implements Action {
 	}
 
 	public void senden(@NonNull Datenlieferung datenlieferung, @NonNull Adresse adresseVersender,
-			@NonNull Adresse adresseEmpfänger) throws FileNotFoundException, IOException {
+			@NonNull Adresse adresseEmpfänger) throws IOException {
 
 		final Context context = new Context();
 		context.setVariable("cdnr", datenlieferung.getCdnummer());

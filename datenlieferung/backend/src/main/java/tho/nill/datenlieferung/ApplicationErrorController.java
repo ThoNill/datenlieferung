@@ -13,8 +13,6 @@ public class ApplicationErrorController implements ErrorController {
 	@RequestMapping("/error")
 	@ResponseBody
 	public String handleError(HttpServletRequest request) {
-		Integer statusCode = (Integer) request.getAttribute("javax.servlet.error.status_code");
-		Exception exception = (Exception) request.getAttribute("javax.servlet.error.exception");
 		return "[error]";
 	}
 

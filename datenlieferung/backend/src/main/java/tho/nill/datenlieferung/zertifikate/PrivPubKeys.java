@@ -1,6 +1,5 @@
 package tho.nill.datenlieferung.zertifikate;
 
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -185,7 +184,7 @@ public class PrivPubKeys {
 		return sign.sign();
 	}
 
-	public static void dump(@NonNull String fileName) throws FileNotFoundException, IOException {
+	public static void dump(@NonNull String fileName) throws IOException {
 		log.info("Dump der Datei {] ", fileName);
 
 		try (ASN1InputStream ais = new ASN1InputStream(Dateien.createInputStream(fileName))) {

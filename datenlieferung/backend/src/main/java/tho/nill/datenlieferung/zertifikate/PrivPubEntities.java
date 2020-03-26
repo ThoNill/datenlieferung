@@ -1,7 +1,6 @@
 package tho.nill.datenlieferung.zertifikate;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.security.KeyFactory;
@@ -69,8 +68,7 @@ public class PrivPubEntities {
 		return request.getEncoded();
 	}
 
-	public void saveCertificationRequest(@NonNull VersenderKey key, @NonNull File output)
-			throws FileNotFoundException, IOException {
+	public void saveCertificationRequest(@NonNull VersenderKey key, @NonNull File output) throws IOException {
 		byte[] request = key.getCertificateRequest();
 		try (FileOutputStream out = Dateien.createOutputStream(output)) {
 			out.write("-----BEGIN NEW CERTIFICATE REQUEST-----\n".getBytes());

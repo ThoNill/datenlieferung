@@ -1,7 +1,6 @@
 package tho.nill.datenlieferung.senden.cd;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -74,7 +73,7 @@ public class Begleitzettel extends Beleg implements Action {
 	}
 
 	public void senden(@NonNull Datenlieferung datenlieferung, @NonNull Adresse adresseVersender,
-			@NonNull Adresse adresseEmpfänger, @NonNull Adresse bearbeiter) throws FileNotFoundException, IOException {
+			@NonNull Adresse adresseEmpfänger, @NonNull Adresse bearbeiter) throws IOException {
 
 		final Context context = new Context();
 		context.setVariable("id", datenlieferung.getDatenlieferungId());

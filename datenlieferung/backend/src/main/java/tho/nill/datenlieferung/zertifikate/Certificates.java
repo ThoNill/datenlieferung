@@ -2,7 +2,6 @@ package tho.nill.datenlieferung.zertifikate;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -188,7 +187,7 @@ public class Certificates {
 	}
 
 	public void createCertificationRequest(@NonNull KeyPair keyPair, @NonNull String _subjDN, @NonNull File output)
-			throws FileNotFoundException, IOException, OperatorCreationException {
+			throws IOException, OperatorCreationException {
 		SubjectPublicKeyInfo subPub = SubjectPublicKeyInfo.getInstance(keyPair.getPublic().getEncoded());
 
 		X500Name subjectName = new X500Name(_subjDN);
@@ -218,13 +217,8 @@ public class Certificates {
 				new Date(System.currentTimeMillis() + (1000L * 60L * 60L * 24L * 365L * 2L)), dnName,
 				keyPair.getPublic());
 
-		// Extensions --------------------------
-
-		// Basic Constraints
 		certBuilder.addExtension(Extension.basicConstraints, true, new BasicConstraints(true)); // <-- true for CA,
 																								// false for EndEntity
-
-		// -------------------------------------
 
 		return new JcaX509CertificateConverter().setProvider(bcProvider)
 				.getCertificate(certBuilder.build(contentSigner));

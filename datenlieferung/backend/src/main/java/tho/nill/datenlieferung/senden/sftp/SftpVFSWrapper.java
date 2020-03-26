@@ -44,7 +44,6 @@ public class SftpVFSWrapper extends SftpBasisWrapper<FileObject> {
 		try {
 			configureConnection(connectionOptions);
 		} catch (GeneralSecurityException | IOException e) {
-			e.printStackTrace();
 			throw new DatenlieferungException(e);
 		}
 		this.remoteBasisFile = fileSystemManager.resolveFile(connectionUrl, connectionOptions);

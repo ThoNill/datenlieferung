@@ -2,7 +2,6 @@ package tho.nill.datenlieferung.zertifikate;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -165,8 +164,7 @@ public class VerschlüsselnSigneren extends Verzeichnisse implements Action {
 
 	public void encryptDataSMIME(@NonNull X509Certificate signingCertificate, @NonNull PrivateKey signingKey,
 			@NonNull X509Certificate encryptionCertificate, @NonNull File inputFile, @NonNull File outputFile)
-			throws FileNotFoundException, IOException, CertificateEncodingException, CMSException,
-			OperatorCreationException {
+			throws IOException, CertificateEncodingException, CMSException, OperatorCreationException {
 
 		byte[] buffer = new byte[1080];
 		try (FileOutputStream ofile = Dateien.createOutputStream(outputFile);
@@ -255,8 +253,8 @@ public class VerschlüsselnSigneren extends Verzeichnisse implements Action {
 	 * CMSProcessableFile
 	 */
 	public void signData2(@NonNull X509Certificate signingCertificate, @NonNull PrivateKey signingKey,
-			@NonNull File inputFile, @NonNull File outputFile) throws CertificateEncodingException,
-			OperatorCreationException, CMSException, FileNotFoundException, IOException {
+			@NonNull File inputFile, @NonNull File outputFile)
+			throws CertificateEncodingException, OperatorCreationException, CMSException, IOException {
 
 		List<X509Certificate> certList = new ArrayList<X509Certificate>();
 		certList.add(signingCertificate);
@@ -283,8 +281,8 @@ public class VerschlüsselnSigneren extends Verzeichnisse implements Action {
 	}
 
 	public void signData(@NonNull X509Certificate signingCertificate, @NonNull PrivateKey signingKey,
-			@NonNull File inputFile, @NonNull File outputFile) throws CertificateEncodingException,
-			OperatorCreationException, CMSException, FileNotFoundException, IOException {
+			@NonNull File inputFile, @NonNull File outputFile)
+			throws CertificateEncodingException, OperatorCreationException, CMSException, IOException {
 		log.debug("Signed out Start ");
 
 		List<X509Certificate> certList = new ArrayList<X509Certificate>();

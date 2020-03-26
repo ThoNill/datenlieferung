@@ -64,8 +64,6 @@ public class SftpEmpfänger {
 			for (FileData fileDescription : fileDescriptions) {
 				sftpLesen(wrapper, austausch, fileDescription);
 			}
-
-			wrapper.close();
 		}
 
 	}

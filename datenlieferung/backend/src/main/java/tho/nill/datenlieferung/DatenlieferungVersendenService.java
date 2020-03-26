@@ -84,19 +84,18 @@ public class DatenlieferungVersendenService extends BasisService<MonatJahr> impl
 
 			Nummervergabe nummernVergabe = new Nummervergabe(nummern);
 			ErzeugeTestDatendatei erzeugen = new ErzeugeTestDatendatei(originalPath, verschlPath);
-			VerschlüsselnSigneren verschlüsseln = new VerschlüsselnSigneren(keyRepo, zertifikatRepo,
-					originalPath, verschlPath);
+			VerschlüsselnSigneren verschlüsseln = new VerschlüsselnSigneren(keyRepo, zertifikatRepo, originalPath,
+					verschlPath);
 			ErzeugeAuftragsDatei auftragsdatei = new ErzeugeAuftragsDatei(originalPath, verschlPath);
 
 			JschWrapperFabric wrapperFabric = new JschWrapperFabric();
-			SftpSender sftpVersand = new SftpSender(datenaustauschRepo, wrapperFabric, originalPath,
-					verschlPath);
+			SftpSender sftpVersand = new SftpSender(datenaustauschRepo, wrapperFabric, originalPath, verschlPath);
 
 			AlleCDBelegeAusgeben cdVersand = new AlleCDBelegeAusgeben(templateEngine, datenaustauschRepo, adresseRepo,
 					datenlieferungenRepo, originalPath, verschlPath);
 
-			EMailSender emailVersand = new EMailSender(templateEngine, datenaustauschRepo, adresseRepo,
-					originalPath, verschlPath);
+			EMailSender emailVersand = new EMailSender(templateEngine, datenaustauschRepo, adresseRepo, originalPath,
+					verschlPath);
 
 			VerteilerVersand sender = new VerteilerVersand(datenaustauschRepo, cdVersand, emailVersand, sftpVersand);
 
@@ -124,7 +123,9 @@ public class DatenlieferungVersendenService extends BasisService<MonatJahr> impl
 	}
 
 	@Override
+	/**
+	 * braucht nicht implementiert werden
+	 */
 	public void accept(Datenlieferung datenlieferung) {
 	}
-
 }
