@@ -32,6 +32,25 @@
 	<dependencies>
 
 		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+			<version>2.13.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>2.13.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-1.2-api</artifactId>
+			<version>2.13.2</version>
+		</dependency>
+
+
+		<dependency>
 			<groupId>tho.nill</groupId>
 			<artifactId>datenlieferungModell</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
