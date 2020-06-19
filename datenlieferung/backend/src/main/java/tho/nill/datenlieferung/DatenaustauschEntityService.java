@@ -42,8 +42,7 @@ public class DatenaustauschEntityService {
 				emailTo, emailFrom, loginNutzer, loginPasswort, name, straße, plz,
 
 				annahmeClassName, codepage);
-		datenaustauschRepro.save(d);
-		return d;
+		return datenaustauschRepro.save(d);
 	}
 
 	public void update(long id, IK versenderIK, IK datenAnnahmeIK, IK datenPrüfungsIK, Richtung richtung,

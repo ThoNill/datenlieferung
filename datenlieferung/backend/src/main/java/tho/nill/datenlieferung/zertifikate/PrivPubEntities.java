@@ -44,8 +44,7 @@ public class PrivPubEntities {
 		key.setCertificateRequest(createCertificationRequest(kp, "CN=" + name + ",OU=IK" + versenderIK
 				+ ",OU=ThomasNill,O=ITSG TrustCenter fuer sonstige Leistungserbringer,C=DE"));
 		key.setAktiv(true);
-		keyRepo.save(key);
-		return key;
+		return keyRepo.save(key);
 	}
 
 	public PrivateKey lesePrivateKey(@NonNull VersenderKey k) throws NoSuchAlgorithmException, InvalidKeySpecException {

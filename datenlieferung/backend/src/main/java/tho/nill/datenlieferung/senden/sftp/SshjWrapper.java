@@ -1,7 +1,5 @@
 package tho.nill.datenlieferung.senden.sftp;
 
-import static tho.nill.datenlieferung.senden.sftp.SftpBasisWrapper.anpasssen;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;

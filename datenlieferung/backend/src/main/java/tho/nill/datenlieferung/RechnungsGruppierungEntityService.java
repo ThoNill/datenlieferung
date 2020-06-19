@@ -27,8 +27,7 @@ public class RechnungsGruppierungEntityService {
 	public RechnungsGruppierung create(IK versenderIK, IK datenPrüfungsIK, DatenArt datenArt, int maxRechnungsAnzahl) {
 		RechnungsGruppierung d = new RechnungsGruppierung();
 		felderSetzen(d, versenderIK, datenPrüfungsIK, datenArt, maxRechnungsAnzahl);
-		rechnungsGruppierungRepo.save(d);
-		return d;
+		return rechnungsGruppierungRepo.save(d);
 	}
 
 	public void update(long id, IK versenderIK, IK datenPrüfungsIK, DatenArt datenArt, int maxRechnungsAnzahl) {

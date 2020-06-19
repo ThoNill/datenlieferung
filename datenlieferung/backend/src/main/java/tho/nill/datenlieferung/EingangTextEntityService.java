@@ -26,8 +26,7 @@ public class EingangTextEntityService {
 	public EingangText create(String regexp, Bewertung bewertung) {
 		EingangText d = new EingangText();
 		felderSetzen(d, regexp, bewertung);
-		eingangTextRepo.save(d);
-		return d;
+		return eingangTextRepo.save(d);
 	}
 
 	public void update(long id, String regexp, Bewertung bewertung) {

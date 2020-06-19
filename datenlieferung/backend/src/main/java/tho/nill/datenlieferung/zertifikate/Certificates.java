@@ -148,6 +148,10 @@ public class Certificates {
 			}
 
 		}
+		erzeugeNeuesZertifikat(cert, ik, pemZertifikat);
+	}
+
+	private Zertifikat erzeugeNeuesZertifikat(X509Certificate cert, IK ik, String pemZertifikat) {
 		Zertifikat zertifikat = new Zertifikat();
 		if (ik != null) {
 			log.info("IK = " + ik);
@@ -162,7 +166,7 @@ public class Certificates {
 		log.info("AlgoOID: " + cert.getSigAlgOID());
 
 		zertifikat.setPemZertifikat(pemZertifikat);
-		certs.saveAndFlush(zertifikat);
+		return certs.saveAndFlush(zertifikat);
 	}
 
 	public X509Certificate leseZertifikat(@NonNull InputStream inStream) throws CertificateException, IOException {

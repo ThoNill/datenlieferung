@@ -23,13 +23,13 @@ public class Protokollführer {
 
 	public int protokolliere(AktionsArt aktionsArt, Datenlieferung datenlieferung, FehlerMeldung fmeldung,
 			Object... args) {
-		String meldung = String.format(fmeldung.meldung, args);
 		DatenlieferungProtokoll protokoll = new DatenlieferungProtokoll();
 		if (datenlieferung != null) {
 			protokoll.setDatenlieferung(datenlieferung);
 		}
 		protokoll.setAm(LocalDateTime.now());
 		protokoll.setFehler(fmeldung);
+		String meldung = String.format(fmeldung.meldung, args);
 		protokoll.setMeldung(meldung);
 		protokoll.setAktion(aktionsArt);
 		datenlieferungProtokollRepo.saveAndFlush(protokoll);

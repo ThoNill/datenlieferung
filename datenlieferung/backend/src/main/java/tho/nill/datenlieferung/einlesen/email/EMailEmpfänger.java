@@ -75,18 +75,22 @@ public class EMailEmpfänger {
 			String text = extractBodyText(messages[i]);
 			log.debug("body= " + extractBodyText(messages[i]));
 
-			EingeleseneDatei datei = new EingeleseneDatei();
-			datei.setArt(Verbindungsart.EMAIL);
-			datei.setDaten(text);
-			datei.setEmailFrom(messages[i].getFrom()[0].toString());
-			datei.setHostverzeichnis("");
-			datei.setErstellt(LocalDateTime.now());
-			eingeleseneDateiRepo.saveAndFlush(datei);
+			neueEingeleseneDatei(messages, i, text);
 
 		}
 
 		inbox.close(true);
 		store.close();
+	}
+
+	private EingeleseneDatei neueEingeleseneDatei(Message[] messages, int i, String text) throws MessagingException {
+		EingeleseneDatei datei = new EingeleseneDatei();
+		datei.setArt(Verbindungsart.EMAIL);
+		datei.setDaten(text);
+		datei.setEmailFrom(messages[i].getFrom()[0].toString());
+		datei.setHostverzeichnis("");
+		datei.setErstellt(LocalDateTime.now());
+		return eingeleseneDateiRepo.saveAndFlush(datei);
 	}
 
 	private String extractBodyText(Message message) throws IOException, MessagingException {

@@ -58,16 +58,21 @@ public class Nummervergabe implements Action {
 			repo.updateAktuelleNummer(idNummer);
 			return repo.getAktuelleNummer(idNummer);
 		} else {
-			DateiNummer nummer = new DateiNummer();
-			nummer.setAktuelleNummer(1);
-			nummer.setVersenderIK(versenderIK);
-			nummer.setDatenArt(datenArt);
-			nummer.setIk(ik);
-			nummer.setJahr(jahr);
-			nummer.setNummernArt(nummernArt);
-			repo.saveAndFlush(nummer);
+			erzeugeNeueDateinummer(nummernArt, datenArt, ik, versenderIK, jahr);
 			return 1;
 		}
+	}
+
+	private DateiNummer erzeugeNeueDateinummer(DateiNummerArt nummernArt, DatenArt datenArt, IK ik, IK versenderIK,
+			int jahr) {
+		DateiNummer nummer = new DateiNummer();
+		nummer.setAktuelleNummer(1);
+		nummer.setVersenderIK(versenderIK);
+		nummer.setDatenArt(datenArt);
+		nummer.setIk(ik);
+		nummer.setJahr(jahr);
+		nummer.setNummernArt(nummernArt);
+		return repo.saveAndFlush(nummer);
 	}
 
 	public void nummerieren(@NonNull IDatenlieferung datenlieferung) {

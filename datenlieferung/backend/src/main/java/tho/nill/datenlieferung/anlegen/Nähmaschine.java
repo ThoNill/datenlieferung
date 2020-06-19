@@ -164,6 +164,13 @@ public class Nähmaschine implements Function<Object[], List<Datenlieferung>> {
 	}
 
 	private Datenlieferung neueDatenlieferung(RechnungAuftrag auftrag) {
+		Datenlieferung d = createDatenlieferung(auftrag);
+		nummernVergabe.nummerieren(d);
+		datenlieferungen.save(d);
+		return d;
+	}
+
+	private Datenlieferung createDatenlieferung(RechnungAuftrag auftrag) {
 		Datenlieferung d = new Datenlieferung();
 		d.setLieferJahr(LocalDateTime.now().getYear());
 		d.setMj(auftrag.getMj());
@@ -177,10 +184,7 @@ public class Nähmaschine implements Function<Object[], List<Datenlieferung>> {
 			d.setPar300Verbindung(par300Verbindung);
 		}
 		d.setLetzteAktion(AktionsArt.ANGELEGT);
-		datenlieferungen.save(d);
-		nummernVergabe.nummerieren(d);
-		datenlieferungen.save(d);
-		return d;
+		return datenlieferungen.save(d);
 	}
 
 	private void einfädeln(Datenlieferung datenlieferung, RechnungAuftrag auftrag) {

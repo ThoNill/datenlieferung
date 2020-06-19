@@ -71,7 +71,7 @@ public class GenerateTestdatenService extends BasisService<DummyVoid> {
 		}
 	}
 
-	private void auftragGenerieren() {
+	private RechnungAuftrag auftragGenerieren() {
 		RechnungAuftrag a = new RechnungAuftrag();
 		a.setRechnungsNummer(rechnr);
 		rechnr++;
@@ -80,10 +80,10 @@ public class GenerateTestdatenService extends BasisService<DummyVoid> {
 		a.setDatenPrüfungsIK(new IK(prüfungsIk));
 		a.setVersenderIK(new IK(versenderIk));
 		a.setMj(new MonatJahr(1, 2019));
-		rechnungsAuftragRepo.saveAndFlush(a);
+		return rechnungsAuftragRepo.saveAndFlush(a);
 	}
 
-	private void datenaustauschGenerierenSFTP() {
+	private Datenaustausch datenaustauschGenerierenSFTP() {
 		Datenaustausch datenaustausch = new Datenaustausch();
 		datenaustausch.setDatenAnnahmeIK(new IK(datenannahmeIk));
 		datenaustausch.setDatenPrüfungsIK(new IK(prüfungsIk));
@@ -96,10 +96,10 @@ public class GenerateTestdatenService extends BasisService<DummyVoid> {
 		datenaustausch.setPort(configSftp.PORT);
 		datenaustausch.setLoginNutzer(configSftp.BENUTZERNAME);
 		datenaustausch.setLoginPasswort(configSftp.PASSWORT);
-		datenaustauschRepo.saveAndFlush(datenaustausch);
+		return datenaustauschRepo.saveAndFlush(datenaustausch);
 	}
 
-	private void datenaustauschGenerierenEmail() {
+	private Datenaustausch datenaustauschGenerierenEmail() {
 		Datenaustausch datenaustausch = new Datenaustausch();
 		datenaustausch.setDatenAnnahmeIK(new IK(datenannahmeIk));
 		datenaustausch.setDatenPrüfungsIK(new IK(prüfungsIk));
@@ -114,7 +114,7 @@ public class GenerateTestdatenService extends BasisService<DummyVoid> {
 		datenaustausch.setLoginPasswort(configEMail.PASSWORT);
 		datenaustausch.setEmailFrom(configEMail.FROM);
 		datenaustausch.setEmailTo(configEMail.TO);
-		datenaustauschRepo.saveAndFlush(datenaustausch);
+		return datenaustauschRepo.saveAndFlush(datenaustausch);
 	}
 
 	public void setDatenart(DatenArt datenart) {

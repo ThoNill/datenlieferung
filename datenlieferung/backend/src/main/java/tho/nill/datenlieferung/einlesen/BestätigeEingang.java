@@ -63,12 +63,12 @@ public class BestätigeEingang extends Verzeichnisse implements Consumer {
 		return Optional.empty();
 	}
 
-	private void keineDateiInfoImText(EingeleseneDatei datei) {
+	private EingeleseneDatei keineDateiInfoImText(EingeleseneDatei datei) {
 		int fehler;
 		fehler = protokoll.protokolliere(AktionsArt.RÜCKMELDUNG, null, FehlerMeldung.EINGANG_KEINE_DATEIINFO,
 				datei.getEingeleseneDateiId());
 		datei.setFehler(fehler);
-		eingeleseneDateiRepo.saveAndFlush(datei);
+		return eingeleseneDateiRepo.saveAndFlush(datei);
 	}
 
 	private int bearbeiteDatenlieferung(EingeleseneDatei datei, Bewertung bewertung, long datenlieferungId) {

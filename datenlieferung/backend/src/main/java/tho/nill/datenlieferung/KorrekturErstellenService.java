@@ -58,51 +58,61 @@ public class KorrekturErstellenService extends BasisService<Long> {
 	}
 
 	private void eineDatenlieferungBearbeiten(Datenlieferung alteDatenlieferung, int verbindungsNummer, int cdNummer) {
-		Nummervergabe nummernVergabe = new Nummervergabe(dateiNummernRepo);
 
-		Datenlieferung neueDatenlieferung = new Datenlieferung();
-
-		neueDatenlieferung.setPar300Verbindung(verbindungsNummer);
-		neueDatenlieferung.setLieferJahr(LocalDateTime.now().getYear());
-		neueDatenlieferung.setMj(alteDatenlieferung.getMj());
-		neueDatenlieferung.setVersenderIK(alteDatenlieferung.getVersenderIK());
-		neueDatenlieferung.setDatenAnnahmeIK(alteDatenlieferung.getDatenAnnahmeIK());
-		neueDatenlieferung.setDatenPrüfungsIK(alteDatenlieferung.getDatenPrüfungsIK());
-		neueDatenlieferung.setDatenArt(alteDatenlieferung.getDatenArt());
-		neueDatenlieferung.setLetzteAktion(AktionsArt.NUMMERIERT);
-		neueDatenlieferung.setDateinummer(alteDatenlieferung.getDateinummer());
-		int transferDatenanahme = nummernVergabe.getNumber(DateiNummerArt.TRANSFERNUMMER_DATENANNAHME,
-				DatenArt.PAR300DATEN, alteDatenlieferung.getDatenAnnahmeIK(), alteDatenlieferung.getVersenderIK(),
-				alteDatenlieferung.getLieferJahr());
-		neueDatenlieferung.setTransfernummer_datenannahme(transferDatenanahme);
-		int transferVorprüfung = nummernVergabe.getNumber(DateiNummerArt.TRANSFERNUMMER_VORPRÜFUNG,
-				DatenArt.PAR300DATEN, alteDatenlieferung.getDatenPrüfungsIK(), alteDatenlieferung.getVersenderIK(),
-				alteDatenlieferung.getLieferJahr());
-		neueDatenlieferung.setTransfernummer_vorprüfung(transferVorprüfung);
-		neueDatenlieferung.setTestKennzeichen(alteDatenlieferung.getTestKennzeichen());
-		neueDatenlieferung.setCdnummer(cdNummer);
-		neueDatenlieferung.setErstellt(LocalDateTime.now());
-		int korrekturnummer = datenlieferungRepo.getKorrekturnummer(alteDatenlieferung.getLieferJahr(),
-				alteDatenlieferung.getMj(), alteDatenlieferung.getVersenderIK(),
-				alteDatenlieferung.getDatenPrüfungsIK(), alteDatenlieferung.getDatenArt(),
-				alteDatenlieferung.getDateinummer());
-		neueDatenlieferung.setKorrekturnummer(korrekturnummer);
-		neueDatenlieferung.setLogDateiname(Dateinamen.berechneLogDateinamen(neueDatenlieferung));
-		neueDatenlieferung.setPhysDateiname(Dateinamen.berechnePhysDateinamen(neueDatenlieferung));
-		datenlieferungRepo.saveAndFlush(neueDatenlieferung);
+		Datenlieferung neueDatenlieferung = erzeugeDatenlieferung(alteDatenlieferung, verbindungsNummer, cdNummer);
 
 		Set<RechnungAuftrag> alteListe = alteDatenlieferung.getRechnungAuftrag();
 		for (RechnungAuftrag a : alteListe) {
-			RechnungAuftrag na = new RechnungAuftrag();
-			na.setDatenAnnahmeIK(a.getDatenAnnahmeIK());
-			na.setDatenArt(na.getDatenArt());
-			na.setDatenPrüfungsIK(a.getDatenPrüfungsIK());
-			na.setVersenderIK(a.getVersenderIK());
-			na.setRechnungsNummer(a.getRechnungsNummer());
-			rechnungAuftragRepo.saveAndFlush(na);
+			RechnungAuftrag na = erzeugeRechnungAuftrag(a);
 			neueDatenlieferung.addRechnungAuftrag(na);
 		}
 
 		datenlieferungRepo.saveAndFlush(neueDatenlieferung);
+	}
+
+	private RechnungAuftrag erzeugeRechnungAuftrag(RechnungAuftrag a) {
+		RechnungAuftrag na = new RechnungAuftrag();
+		na.setDatenAnnahmeIK(a.getDatenAnnahmeIK());
+		na.setDatenArt(na.getDatenArt());
+		na.setDatenPrüfungsIK(a.getDatenPrüfungsIK());
+		na.setVersenderIK(a.getVersenderIK());
+		na.setRechnungsNummer(a.getRechnungsNummer());
+		return rechnungAuftragRepo.saveAndFlush(na);
+	}
+
+	private Datenlieferung erzeugeDatenlieferung(Datenlieferung alteDatenlieferung, int verbindungsNummer,
+			int cdNummer) {
+		Datenlieferung datenlieferung = new Datenlieferung();
+
+		datenlieferung.setPar300Verbindung(verbindungsNummer);
+		datenlieferung.setLieferJahr(LocalDateTime.now().getYear());
+		datenlieferung.setMj(alteDatenlieferung.getMj());
+		datenlieferung.setVersenderIK(alteDatenlieferung.getVersenderIK());
+		datenlieferung.setDatenAnnahmeIK(alteDatenlieferung.getDatenAnnahmeIK());
+		datenlieferung.setDatenPrüfungsIK(alteDatenlieferung.getDatenPrüfungsIK());
+		datenlieferung.setDatenArt(alteDatenlieferung.getDatenArt());
+		datenlieferung.setLetzteAktion(AktionsArt.NUMMERIERT);
+		datenlieferung.setDateinummer(alteDatenlieferung.getDateinummer());
+
+		Nummervergabe nummernVergabe = new Nummervergabe(dateiNummernRepo);
+		int transferDatenanahme = nummernVergabe.getNumber(DateiNummerArt.TRANSFERNUMMER_DATENANNAHME,
+				DatenArt.PAR300DATEN, alteDatenlieferung.getDatenAnnahmeIK(), alteDatenlieferung.getVersenderIK(),
+				alteDatenlieferung.getLieferJahr());
+		datenlieferung.setTransfernummer_datenannahme(transferDatenanahme);
+		int transferVorprüfung = nummernVergabe.getNumber(DateiNummerArt.TRANSFERNUMMER_VORPRÜFUNG,
+				DatenArt.PAR300DATEN, alteDatenlieferung.getDatenPrüfungsIK(), alteDatenlieferung.getVersenderIK(),
+				alteDatenlieferung.getLieferJahr());
+		datenlieferung.setTransfernummer_vorprüfung(transferVorprüfung);
+		datenlieferung.setTestKennzeichen(alteDatenlieferung.getTestKennzeichen());
+		datenlieferung.setCdnummer(cdNummer);
+		datenlieferung.setErstellt(LocalDateTime.now());
+		int korrekturnummer = datenlieferungRepo.getKorrekturnummer(alteDatenlieferung.getLieferJahr(),
+				alteDatenlieferung.getMj(), alteDatenlieferung.getVersenderIK(),
+				alteDatenlieferung.getDatenPrüfungsIK(), alteDatenlieferung.getDatenArt(),
+				alteDatenlieferung.getDateinummer());
+		datenlieferung.setKorrekturnummer(korrekturnummer);
+		datenlieferung.setLogDateiname(Dateinamen.berechneLogDateinamen(datenlieferung));
+		datenlieferung.setPhysDateiname(Dateinamen.berechnePhysDateinamen(datenlieferung));
+		return datenlieferungRepo.saveAndFlush(datenlieferung);
 	}
 }
