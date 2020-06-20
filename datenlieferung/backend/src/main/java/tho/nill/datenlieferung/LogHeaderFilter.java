@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class LogHeaderFilter implements Filter {
-	private static Logger LOGGER = LoggerFactory.getLogger(SecurityController.class);
+	private static Logger LOGGER = LoggerFactory.getLogger(LogHeaderFilter.class);
 
 	public LogHeaderFilter() {
 		LOGGER.debug("LogHeaderFilter wurde erzeugt");
