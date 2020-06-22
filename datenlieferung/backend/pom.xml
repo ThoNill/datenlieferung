@@ -54,7 +54,7 @@
 							<phase>generate-sources</phase>
 
 							<configuration>
-								<doNothing combine.self="override">false</doNothing>
+								<doNothing combine.self="override">true</doNothing>
 							</configuration>
 
 							<goals>
