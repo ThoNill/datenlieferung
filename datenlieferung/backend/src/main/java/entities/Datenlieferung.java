@@ -373,12 +373,12 @@ public class Datenlieferung {
 	private Set<RechnungAuftrag> RechnungAuftrag = new HashSet<>();
 
 	public void addRechnungAuftrag(RechnungAuftrag x) {
-		this.RechnungAuftrag.add((RechnungAuftrag) x);
+		this.RechnungAuftrag.add(x);
 		x.setDatenlieferung(this);
 	}
 
 	public void removeRechnungAuftrag(RechnungAuftrag x) {
-		this.RechnungAuftrag.remove((RechnungAuftrag) x);
+		this.RechnungAuftrag.remove(x);
 		x.setDatenlieferung(null);
 	}
 
@@ -388,12 +388,12 @@ public class Datenlieferung {
 	private Set<DatenlieferungProtokoll> DatenlieferungProtokoll = new HashSet<>();
 
 	public void addDatenlieferungProtokoll(DatenlieferungProtokoll x) {
-		this.DatenlieferungProtokoll.add((DatenlieferungProtokoll) x);
+		this.DatenlieferungProtokoll.add(x);
 		x.setDatenlieferung(this);
 	}
 
 	public void removeDatenlieferungProtokoll(DatenlieferungProtokoll x) {
-		this.DatenlieferungProtokoll.remove((DatenlieferungProtokoll) x);
+		this.DatenlieferungProtokoll.remove(x);
 		x.setDatenlieferung(null);
 	}
 
@@ -405,12 +405,12 @@ public class Datenlieferung {
 	private Set<EingeleseneDatei> EingeleseneDatei = new HashSet<>();
 
 	public void addEingeleseneDatei(EingeleseneDatei x) {
-		this.EingeleseneDatei.add((EingeleseneDatei) x);
+		this.EingeleseneDatei.add(x);
 		x.addDatenlieferung(this);
 	}
 
 	public void removeEingeleseneDatei(EingeleseneDatei x) {
-		this.EingeleseneDatei.remove((EingeleseneDatei) x);
+		this.EingeleseneDatei.remove(x);
 		x.removeDatenlieferung(this);
 	}
 

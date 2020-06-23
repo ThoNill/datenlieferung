@@ -134,7 +134,7 @@ public class RechnungAuftrag {
 	private Datenlieferung Datenlieferung;
 
 	public void setDatenlieferung(Datenlieferung value) {
-		Datenlieferung = (Datenlieferung) value;
+		Datenlieferung = value;
 	}
 
 	public Datenlieferung getDatenlieferung() {

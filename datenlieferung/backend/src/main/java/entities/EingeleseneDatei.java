@@ -142,11 +142,11 @@ public class EingeleseneDatei {
 	private Set<Datenlieferung> Datenlieferung = new HashSet<>();
 
 	public void addDatenlieferung(Datenlieferung x) {
-		this.Datenlieferung.add((Datenlieferung) x);
+		this.Datenlieferung.add(x);
 	}
 
 	public void removeDatenlieferung(Datenlieferung x) {
-		this.Datenlieferung.remove((Datenlieferung) x);
+		this.Datenlieferung.remove(x);
 	}
 
 }
