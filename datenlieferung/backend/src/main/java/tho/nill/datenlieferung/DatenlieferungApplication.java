@@ -12,10 +12,10 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EntityScan("entities")
 @ComponentScan
 @EnableTransactionManagement
-public class DemoApplication {
+public class DatenlieferungApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DemoApplication.class, args);
+		SpringApplication.run(DatenlieferungApplication.class, args);
 	}
 
 }
