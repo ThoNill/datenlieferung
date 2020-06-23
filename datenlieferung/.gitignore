@@ -34,3 +34,4 @@ build/
 .vscode/
 /killPort4200Processes.sh
 /killPort9000Processes.sh
+/derby.log
