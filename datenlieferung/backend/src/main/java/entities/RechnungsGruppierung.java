@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import interfaces.IRechnungsGruppierung;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -24,92 +23,72 @@ import tho.nill.datenlieferung.simpleAttributes.IK;
 @Entity
 @Table(name = "RECHNUNGSGRUPPIERUNG")
 @SequenceGenerator(name = "RECHNUNGSGRUPPIERUNG_SEQ", sequenceName = "RECHNUNGSGRUPPIERUNG_SEQ")
-public class RechnungsGruppierung implements IRechnungsGruppierung {
+public class RechnungsGruppierung {
 
-    @EqualsAndHashCode.Include
-    @ToString.Include
-    @Basic
-    @Column(name = "RECHNUNGSGRUPPIERUNGID")
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "RECHNUNGSGRUPPIERUNG_SEQ")
-    private java.lang.Long RechnungsGruppierungId;
+	@EqualsAndHashCode.Include
+	@ToString.Include
+	@Basic
+	@Column(name = "RECHNUNGSGRUPPIERUNGID")
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "RECHNUNGSGRUPPIERUNG_SEQ")
+	private java.lang.Long RechnungsGruppierungId;
 
-         
-        // Kind: (value)
+	// Kind: (value)
 
+	@Basic
+	@Column(name = "VERSENDERIK")
+	@Convert(converter = tho.nill.datenlieferung.simpleAttributes.IKAdapter.class)
+	private IK versenderIK;
 
-     		@Basic
-     	    @Column(name = "VERSENDERIK")
-     	     @Convert(converter = tho.nill.datenlieferung.simpleAttributes.IKAdapter.class)
-     	    private IK versenderIK;
+	public IK getVersenderIK() {
+		return versenderIK;
+	}
 
+	public void setVersenderIK(IK value) {
+		versenderIK = value;
+	}
 
-     	    @Override
-			public IK getVersenderIK() {
-     	    	return versenderIK;
-     	    }
+	// Kind: (value)
 
-     	    @Override
-			public void setVersenderIK(IK value) {
-     	    	versenderIK = value;
-     	    }
+	@Basic
+	@Column(name = "DATENPRÜFUNGSIK")
+	@Convert(converter = tho.nill.datenlieferung.simpleAttributes.IKAdapter.class)
+	private IK datenPrüfungsIK;
 
-         
-        // Kind: (value)
+	public IK getDatenPrüfungsIK() {
+		return datenPrüfungsIK;
+	}
 
+	public void setDatenPrüfungsIK(IK value) {
+		datenPrüfungsIK = value;
+	}
 
-     		@Basic
-     	    @Column(name = "DATENPRÜFUNGSIK")
-     	     @Convert(converter = tho.nill.datenlieferung.simpleAttributes.IKAdapter.class)
-     	    private IK datenPrüfungsIK;
+	// Kind: (enumeration)
 
+	@Enumerated
+	@Column(name = "DATENART")
+	private DatenArt datenArt;
 
-     	    @Override
-			public IK getDatenPrüfungsIK() {
-     	    	return datenPrüfungsIK;
-     	    }
+	public DatenArt getDatenArt() {
+		return datenArt;
+	}
 
-     	    @Override
-			public void setDatenPrüfungsIK(IK value) {
-     	    	datenPrüfungsIK = value;
-     	    }
+	public void setDatenArt(DatenArt value) {
+		datenArt = value;
+	}
 
-         
-        // Kind: (enumeration)
+	// Kind: (value)
 
+	@Basic
+	@Column(name = "MAXRECHNUNGSANZAHL")
+	private int maxRechnungsAnzahl;
 
-     	    @Enumerated
-     	    @Column(name = "DATENART")
-     	    private DatenArt datenArt;
+	public int getMaxRechnungsAnzahl() {
+		return maxRechnungsAnzahl;
+	}
 
-
-     	    @Override
-			public DatenArt getDatenArt() {
-     	    	return datenArt;
-     	    }
-
-     	    @Override
-			public void setDatenArt(DatenArt value) {
-     	    	datenArt = value;
-     	    }
-         
-        // Kind: (value)
-
-
-     		@Basic
-     	    @Column(name = "MAXRECHNUNGSANZAHL")
-     	    private int maxRechnungsAnzahl;
-
-
-     	    @Override
-			public int getMaxRechnungsAnzahl() {
-     	    	return maxRechnungsAnzahl;
-     	    }
-
-     	    @Override
-			public void setMaxRechnungsAnzahl(int value) {
-     	    	maxRechnungsAnzahl = value;
-     	    }
+	public void setMaxRechnungsAnzahl(int value) {
+		maxRechnungsAnzahl = value;
+	}
 
 }
-

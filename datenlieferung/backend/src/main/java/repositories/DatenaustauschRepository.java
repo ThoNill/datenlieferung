@@ -8,14 +8,13 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import entities.Datenaustausch;
-import interfaces.IDatenaustauschRepository;
 import tho.nill.datenlieferung.simpleAttributes.DatenArt;
 import tho.nill.datenlieferung.simpleAttributes.IK;
 import tho.nill.datenlieferung.simpleAttributes.Richtung;
 import tho.nill.datenlieferung.simpleAttributes.Verbindungsart;
 
 @Repository
-public interface DatenaustauschRepository extends JpaRepository<Datenaustausch, Long>, IDatenaustauschRepository {
+public interface DatenaustauschRepository extends JpaRepository<Datenaustausch, Long> {
 
 	@Query("select d from entities.Datenaustausch d where d.versenderIK = :versenderIK and d.datenAnnahmeIK = :datenAnnahmeIK  and d.datenPrüfungsIK = :datenPrüfungsIK and d.richtung = :richtung and d.datenArt = :datenArt and d.verbindung = :verbindung ")
 	public List<Datenaustausch> getDatenaustausch(@Param("versenderIK") IK versenderIK,

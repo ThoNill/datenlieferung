@@ -16,8 +16,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import interfaces.IDatenlieferung;
-import interfaces.IEingeleseneDatei;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -29,7 +27,7 @@ import tho.nill.datenlieferung.simpleAttributes.Verbindungsart;
 @Entity
 @Table(name = "EINGELESENEDATEI")
 @SequenceGenerator(name = "EINGELESENEDATEI_SEQ", sequenceName = "EINGELESENEDATEI_SEQ")
-public class EingeleseneDatei implements IEingeleseneDatei {
+public class EingeleseneDatei {
 
 	@EqualsAndHashCode.Include
 	@ToString.Include
@@ -72,12 +70,10 @@ public class EingeleseneDatei implements IEingeleseneDatei {
 	@Column(name = "EMAILFROM")
 	private String emailFrom;
 
-	@Override
 	public String getEmailFrom() {
 		return emailFrom;
 	}
 
-	@Override
 	public void setEmailFrom(String value) {
 		emailFrom = value;
 	}
@@ -145,13 +141,11 @@ public class EingeleseneDatei implements IEingeleseneDatei {
 	@ManyToMany(mappedBy = "EingeleseneDatei")
 	private Set<Datenlieferung> Datenlieferung = new HashSet<>();
 
-	@Override
-	public void addDatenlieferung(IDatenlieferung x) {
+	public void addDatenlieferung(Datenlieferung x) {
 		this.Datenlieferung.add((Datenlieferung) x);
 	}
 
-	@Override
-	public void removeDatenlieferung(IDatenlieferung x) {
+	public void removeDatenlieferung(Datenlieferung x) {
 		this.Datenlieferung.remove((Datenlieferung) x);
 	}
 

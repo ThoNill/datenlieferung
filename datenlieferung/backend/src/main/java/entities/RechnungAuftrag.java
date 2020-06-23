@@ -16,8 +16,6 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-import interfaces.IDatenlieferung;
-import interfaces.IRechnungAuftrag;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -31,7 +29,7 @@ import tho.nill.datenlieferung.simpleAttributes.MonatJahr;
 @Entity
 @Table(name = "RECHNUNGAUFTRAG")
 @SequenceGenerator(name = "RECHNUNGAUFTRAG_SEQ", sequenceName = "RECHNUNGAUFTRAG_SEQ")
-public class RechnungAuftrag implements IRechnungAuftrag {
+public class RechnungAuftrag {
 
 	@EqualsAndHashCode.Include
 	@ToString.Include
@@ -48,12 +46,10 @@ public class RechnungAuftrag implements IRechnungAuftrag {
 	@Convert(converter = tho.nill.datenlieferung.simpleAttributes.MonatJahrAdapter.class)
 	private MonatJahr mj;
 
-	@Override
 	public MonatJahr getMj() {
 		return mj;
 	}
 
-	@Override
 	public void setMj(MonatJahr value) {
 		mj = value;
 	}
@@ -64,12 +60,10 @@ public class RechnungAuftrag implements IRechnungAuftrag {
 	@Column(name = "RECHNUNGSNUMMER")
 	private int rechnungsNummer;
 
-	@Override
 	public int getRechnungsNummer() {
 		return rechnungsNummer;
 	}
 
-	@Override
 	public void setRechnungsNummer(int value) {
 		rechnungsNummer = value;
 	}
@@ -81,12 +75,10 @@ public class RechnungAuftrag implements IRechnungAuftrag {
 	@Convert(converter = tho.nill.datenlieferung.simpleAttributes.IKAdapter.class)
 	private IK versenderIK;
 
-	@Override
 	public IK getVersenderIK() {
 		return versenderIK;
 	}
 
-	@Override
 	public void setVersenderIK(IK value) {
 		versenderIK = value;
 	}
@@ -98,12 +90,10 @@ public class RechnungAuftrag implements IRechnungAuftrag {
 	@Convert(converter = tho.nill.datenlieferung.simpleAttributes.IKAdapter.class)
 	private IK datenAnnahmeIK;
 
-	@Override
 	public IK getDatenAnnahmeIK() {
 		return datenAnnahmeIK;
 	}
 
-	@Override
 	public void setDatenAnnahmeIK(IK value) {
 		datenAnnahmeIK = value;
 	}
@@ -115,12 +105,10 @@ public class RechnungAuftrag implements IRechnungAuftrag {
 	@Convert(converter = tho.nill.datenlieferung.simpleAttributes.IKAdapter.class)
 	private IK datenPrüfungsIK;
 
-	@Override
 	public IK getDatenPrüfungsIK() {
 		return datenPrüfungsIK;
 	}
 
-	@Override
 	public void setDatenPrüfungsIK(IK value) {
 		datenPrüfungsIK = value;
 	}
@@ -131,12 +119,10 @@ public class RechnungAuftrag implements IRechnungAuftrag {
 	@Column(name = "DATENART")
 	private DatenArt datenArt;
 
-	@Override
 	public DatenArt getDatenArt() {
 		return datenArt;
 	}
 
-	@Override
 	public void setDatenArt(DatenArt value) {
 		datenArt = value;
 	}
@@ -147,8 +133,7 @@ public class RechnungAuftrag implements IRechnungAuftrag {
 	@JoinColumn(name = "Datenlieferung_Id")
 	private Datenlieferung Datenlieferung;
 
-	@Override
-	public void setDatenlieferung(IDatenlieferung value) {
+	public void setDatenlieferung(Datenlieferung value) {
 		Datenlieferung = (Datenlieferung) value;
 	}
 

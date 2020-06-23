@@ -13,7 +13,6 @@ import javax.persistence.Lob;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import interfaces.IVersenderKey;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -25,7 +24,7 @@ import tho.nill.datenlieferung.simpleAttributes.IK;
 @Entity
 @Table(name = "PRIVATEKEY")
 @SequenceGenerator(name = "PRIVATEKEY_SEQ", sequenceName = "PRIVATEKEY_SEQ")
-public class VersenderKey implements IVersenderKey {
+public class VersenderKey {
 
 	@EqualsAndHashCode.Include
 	@ToString.Include
@@ -42,12 +41,10 @@ public class VersenderKey implements IVersenderKey {
 	@Convert(converter = tho.nill.datenlieferung.simpleAttributes.IKAdapter.class)
 	private IK versenderIK;
 
-	@Override
 	public IK getVersenderIK() {
 		return versenderIK;
 	}
 
-	@Override
 	public void setVersenderIK(IK value) {
 		versenderIK = value;
 	}
@@ -70,12 +67,10 @@ public class VersenderKey implements IVersenderKey {
 	@Column(name = "VON")
 	private Instant von;
 
-	@Override
 	public Instant getVon() {
 		return von;
 	}
 
-	@Override
 	public void setVon(Instant value) {
 		von = value;
 	}
@@ -86,12 +81,10 @@ public class VersenderKey implements IVersenderKey {
 	@Column(name = "BIS")
 	private Instant bis;
 
-	@Override
 	public Instant getBis() {
 		return bis;
 	}
 
-	@Override
 	public void setBis(Instant value) {
 		bis = value;
 	}
@@ -102,12 +95,10 @@ public class VersenderKey implements IVersenderKey {
 	@Column(name = "AKTIV")
 	private boolean aktiv;
 
-	@Override
 	public boolean getAktiv() {
 		return aktiv;
 	}
 
-	@Override
 	public void setAktiv(boolean value) {
 		aktiv = value;
 	}

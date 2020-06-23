@@ -8,8 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import entities.DateiNummer;
 import entities.Datenlieferung;
 import entities.DatenlieferungProtokoll;
-import interfaces.IDatenlieferung;
-import interfaces.IRechnungAuftrag;
+import entities.RechnungAuftrag;
 import lombok.NonNull;
 import repositories.DateiNummerRepository;
 import tho.nill.datenlieferung.allgemein.Action;
@@ -40,7 +39,7 @@ public class Nummervergabe implements Action {
 		return Optional.empty();
 	}
 
-	public int getNeueCDNummer(@NonNull IRechnungAuftrag auftrag) {
+	public int getNeueCDNummer(@NonNull RechnungAuftrag auftrag) {
 		return getNumber(DateiNummerArt.CD_NUMMER, DatenArt.CD_NUMMER, auftrag.getVersenderIK(),
 				auftrag.getVersenderIK(), 0);
 	}
@@ -75,7 +74,7 @@ public class Nummervergabe implements Action {
 		return repo.saveAndFlush(nummer);
 	}
 
-	public void nummerieren(@NonNull IDatenlieferung datenlieferung) {
+	public void nummerieren(@NonNull Datenlieferung datenlieferung) {
 		datenlieferung.setLieferJahr(LocalDateTime.now().getYear());
 		switch (datenlieferung.getDatenArt()) {
 		case PAR300ABRP:
@@ -90,7 +89,7 @@ public class Nummervergabe implements Action {
 		datenlieferung.setLetzteAktion(AktionsArt.NUMMERIERT);
 	}
 
-	private void sonst(IDatenlieferung datenlieferung) {
+	private void sonst(Datenlieferung datenlieferung) {
 		int transferDatenanahme = getNumber(DateiNummerArt.TRANSFERNUMMER_DATENANNAHME, DatenArt.PAR300DATEN,
 				datenlieferung.getDatenAnnahmeIK(), datenlieferung.getVersenderIK(), datenlieferung.getLieferJahr());
 
@@ -101,7 +100,7 @@ public class Nummervergabe implements Action {
 		datenlieferung.setDateinummer(dateinr);
 	}
 
-	private void bei300(IDatenlieferung datenlieferung) {
+	private void bei300(Datenlieferung datenlieferung) {
 		int transferDatenanahme = getNumber(DateiNummerArt.TRANSFERNUMMER_DATENANNAHME, DatenArt.PAR300DATEN,
 				datenlieferung.getDatenAnnahmeIK(), datenlieferung.getVersenderIK(), datenlieferung.getLieferJahr());
 		int transferVorprüfung = getNumber(DateiNummerArt.TRANSFERNUMMER_VORPRÜFUNG, DatenArt.PAR300DATEN,
@@ -114,8 +113,8 @@ public class Nummervergabe implements Action {
 	}
 
 	// TODO
-	public void nummerierenBeiFehler(@NonNull IDatenlieferung datenlieferung,
-			@NonNull IDatenlieferung ursprungsDatenlieferung) {
+	public void nummerierenBeiFehler(@NonNull Datenlieferung datenlieferung,
+			@NonNull Datenlieferung ursprungsDatenlieferung) {
 		switch (datenlieferung.getDatenArt()) {
 		case PAR300ABRP:
 		case PAR300RECP:

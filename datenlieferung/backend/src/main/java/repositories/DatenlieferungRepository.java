@@ -10,13 +10,12 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import entities.Datenlieferung;
-import interfaces.IDatenlieferungRepository;
 import tho.nill.datenlieferung.simpleAttributes.DatenArt;
 import tho.nill.datenlieferung.simpleAttributes.IK;
 import tho.nill.datenlieferung.simpleAttributes.MonatJahr;
 
 @Repository
-public interface DatenlieferungRepository extends JpaRepository<Datenlieferung, Long>, IDatenlieferungRepository {
+public interface DatenlieferungRepository extends JpaRepository<Datenlieferung, Long> {
 
 	@Query("select d from entities.Datenlieferung d where d.cdnummer = :cdnummer  ")
 	public List<Datenlieferung> getDatenlieferungenZurCD(@Param("cdnummer") int cdnummer);

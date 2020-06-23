@@ -10,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import interfaces.IEingangText;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -22,48 +21,41 @@ import tho.nill.datenlieferung.simpleAttributes.Bewertung;
 @Entity
 @Table(name = "EINGANGTEXT")
 @SequenceGenerator(name = "EINGANGTEXT_SEQ", sequenceName = "EINGANGTEXT_SEQ")
-public class EingangText implements IEingangText {
+public class EingangText {
 
-    @EqualsAndHashCode.Include
-    @ToString.Include
-    @Basic
-    @Column(name = "EINGANGTEXTID")
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "EINGANGTEXT_SEQ")
-    private java.lang.Long EingangTextId;
+	@EqualsAndHashCode.Include
+	@ToString.Include
+	@Basic
+	@Column(name = "EINGANGTEXTID")
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "EINGANGTEXT_SEQ")
+	private java.lang.Long EingangTextId;
 
-         
-        // Kind: (value)
+	// Kind: (value)
 
+	@Basic
+	@Column(name = "REGEXP")
+	private String regexp;
 
-     		@Basic
-     	    @Column(name = "REGEXP")
-     	    private String regexp;
+	public String getRegexp() {
+		return regexp;
+	}
 
+	public void setRegexp(String value) {
+		regexp = value;
+	}
 
-     	    public String getRegexp() {
-     	    	return regexp;
-     	    }
+	// Kind: (enumeration)
 
-     	    public void setRegexp(String value) {
-     	    	regexp = value;
-     	    }
+	@Enumerated
+	@Column(name = "BEWERTUNG")
+	private Bewertung bewertung;
 
-         
-        // Kind: (enumeration)
+	public Bewertung getBewertung() {
+		return bewertung;
+	}
 
-
-     	    @Enumerated
-     	    @Column(name = "BEWERTUNG")
-     	    private Bewertung bewertung;
-
-
-     	    public Bewertung getBewertung() {
-     	    	return bewertung;
-     	    }
-
-     	    public void setBewertung(Bewertung value) {
-     	    	bewertung = value;
-     	    }
+	public void setBewertung(Bewertung value) {
+		bewertung = value;
+	}
 }
-

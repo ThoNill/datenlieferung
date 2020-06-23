@@ -17,8 +17,6 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-import interfaces.IDatenlieferung;
-import interfaces.IDatenlieferungProtokoll;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -31,7 +29,7 @@ import tho.nill.datenlieferung.simpleAttributes.FehlerMeldung;
 @Entity
 @Table(name = "DATENLIEFERUNGPROTOKOLL")
 @SequenceGenerator(name = "DATENLIEFERUNGPROTOKOLL_SEQ", sequenceName = "DATENLIEFERUNGPROTOKOLL_SEQ")
-public class DatenlieferungProtokoll implements IDatenlieferungProtokoll {
+public class DatenlieferungProtokoll {
 
 	@EqualsAndHashCode.Include
 	@ToString.Include
@@ -46,12 +44,10 @@ public class DatenlieferungProtokoll implements IDatenlieferungProtokoll {
 	@Column(name = "AM", columnDefinition = "TIMESTAMP")
 	private LocalDateTime am;
 
-	@Override
 	public LocalDateTime getAm() {
 		return am;
 	}
 
-	@Override
 	public void setAm(LocalDateTime value) {
 		am = value;
 	}
@@ -62,12 +58,10 @@ public class DatenlieferungProtokoll implements IDatenlieferungProtokoll {
 	@Column(name = "AKTION")
 	private AktionsArt aktion;
 
-	@Override
 	public AktionsArt getAktion() {
 		return aktion;
 	}
 
-	@Override
 	public void setAktion(AktionsArt value) {
 		aktion = value;
 	}
@@ -78,12 +72,10 @@ public class DatenlieferungProtokoll implements IDatenlieferungProtokoll {
 	@Column(name = "FEHLER")
 	private FehlerMeldung fehler;
 
-	@Override
 	public FehlerMeldung getFehler() {
 		return fehler;
 	}
 
-	@Override
 	public void setFehler(FehlerMeldung value) {
 		fehler = value;
 	}
@@ -94,12 +86,10 @@ public class DatenlieferungProtokoll implements IDatenlieferungProtokoll {
 	@Column(name = "MELDUNG")
 	private String meldung;
 
-	@Override
 	public String getMeldung() {
 		return meldung;
 	}
 
-	@Override
 	public void setMeldung(String value) {
 		meldung = value;
 	}
@@ -110,12 +100,10 @@ public class DatenlieferungProtokoll implements IDatenlieferungProtokoll {
 	@Column(name = "EXEPTION_CLASS")
 	private String exeption_class;
 
-	@Override
 	public String getExeption_class() {
 		return exeption_class;
 	}
 
-	@Override
 	public void setExeption_class(String value) {
 		exeption_class = value;
 	}
@@ -126,12 +114,10 @@ public class DatenlieferungProtokoll implements IDatenlieferungProtokoll {
 	@Column(name = "EXEPTION_MELDUNG")
 	private String exeption_meldung;
 
-	@Override
 	public String getExeption_meldung() {
 		return exeption_meldung;
 	}
 
-	@Override
 	public void setExeption_meldung(String value) {
 		exeption_meldung = value;
 	}
@@ -142,8 +128,7 @@ public class DatenlieferungProtokoll implements IDatenlieferungProtokoll {
 	@JoinColumn(name = "Datenlieferung_Id")
 	private Datenlieferung Datenlieferung;
 
-	@Override
-	public void setDatenlieferung(IDatenlieferung value) {
+	public void setDatenlieferung(Datenlieferung value) {
 		Datenlieferung = (Datenlieferung) value;
 	}
 

@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import interfaces.IAdresse;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -24,186 +23,141 @@ import tho.nill.datenlieferung.simpleAttributes.IK;
 @Entity
 @Table(name = "ADRESSE")
 @SequenceGenerator(name = "ADRESSE_SEQ", sequenceName = "ADRESSE_SEQ")
-public class Adresse implements IAdresse {
+public class Adresse {
 
-    @EqualsAndHashCode.Include
-    @ToString.Include
-    @Basic
-    @Column(name = "ADRESSEID")
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ADRESSE_SEQ")
-    private java.lang.Long AdresseId;
+	@EqualsAndHashCode.Include
+	@ToString.Include
+	@Basic
+	@Column(name = "ADRESSEID")
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ADRESSE_SEQ")
+	private java.lang.Long AdresseId;
 
-         
-        // Kind: (value)
+	// Kind: (value)
 
+	@Basic
+	@Column(name = "IK")
+	@Convert(converter = tho.nill.datenlieferung.simpleAttributes.IKAdapter.class)
+	private IK ik;
 
-     		@Basic
-     	    @Column(name = "IK")
-     	     @Convert(converter = tho.nill.datenlieferung.simpleAttributes.IKAdapter.class)
-     	    private IK ik;
+	public IK getIk() {
+		return ik;
+	}
 
+	public void setIk(IK value) {
+		ik = value;
+	}
 
-     	    @Override
-			public IK getIk() {
-     	    	return ik;
-     	    }
+	// Kind: (enumeration)
 
-     	    @Override
-			public void setIk(IK value) {
-     	    	ik = value;
-     	    }
+	@Enumerated
+	@Column(name = "ART")
+	private AdressArt art;
 
-         
-        // Kind: (enumeration)
+	public AdressArt getArt() {
+		return art;
+	}
 
+	public void setArt(AdressArt value) {
+		art = value;
+	}
 
-     	    @Enumerated
-     	    @Column(name = "ART")
-     	    private AdressArt art;
+	// Kind: (value)
 
+	@Basic
+	@Column(name = "ANSPRECHPARTNER")
+	private String ansprechpartner;
 
-     	    @Override
-			public AdressArt getArt() {
-     	    	return art;
-     	    }
+	public String getAnsprechpartner() {
+		return ansprechpartner;
+	}
 
-     	    @Override
-			public void setArt(AdressArt value) {
-     	    	art = value;
-     	    }
-         
-        // Kind: (value)
+	public void setAnsprechpartner(String value) {
+		ansprechpartner = value;
+	}
 
+	// Kind: (value)
 
-     		@Basic
-     	    @Column(name = "ANSPRECHPARTNER")
-     	    private String ansprechpartner;
+	@Basic
+	@Column(name = "FIRMA")
+	private String firma;
 
+	public String getFirma() {
+		return firma;
+	}
 
-     	    @Override
-			public String getAnsprechpartner() {
-     	    	return ansprechpartner;
-     	    }
+	public void setFirma(String value) {
+		firma = value;
+	}
 
-     	    @Override
-			public void setAnsprechpartner(String value) {
-     	    	ansprechpartner = value;
-     	    }
+	// Kind: (value)
 
-         
-        // Kind: (value)
+	@Basic
+	@Column(name = "PLZ")
+	private String plz;
 
+	public String getPlz() {
+		return plz;
+	}
 
-     		@Basic
-     	    @Column(name = "FIRMA")
-     	    private String firma;
+	public void setPlz(String value) {
+		plz = value;
+	}
 
+	// Kind: (value)
 
-     	    @Override
-			public String getFirma() {
-     	    	return firma;
-     	    }
+	@Basic
+	@Column(name = "ORT")
+	private String ort;
 
-     	    @Override
-			public void setFirma(String value) {
-     	    	firma = value;
-     	    }
+	public String getOrt() {
+		return ort;
+	}
 
-         
-        // Kind: (value)
+	public void setOrt(String value) {
+		ort = value;
+	}
 
+	// Kind: (value)
 
-     		@Basic
-     	    @Column(name = "PLZ")
-     	    private String plz;
+	@Basic
+	@Column(name = "STRASSE")
+	private String straße;
 
+	public String getStraße() {
+		return straße;
+	}
 
-     	    @Override
-			public String getPlz() {
-     	    	return plz;
-     	    }
+	public void setStraße(String value) {
+		straße = value;
+	}
 
-     	    @Override
-			public void setPlz(String value) {
-     	    	plz = value;
-     	    }
+	// Kind: (value)
 
-         
-        // Kind: (value)
+	@Basic
+	@Column(name = "TELEFON")
+	private String telefon;
 
+	public String getTelefon() {
+		return telefon;
+	}
 
-     		@Basic
-     	    @Column(name = "ORT")
-     	    private String ort;
+	public void setTelefon(String value) {
+		telefon = value;
+	}
 
+	// Kind: (value)
 
-     	    @Override
-			public String getOrt() {
-     	    	return ort;
-     	    }
+	@Basic
+	@Column(name = "EMAIL")
+	private String email;
 
-     	    @Override
-			public void setOrt(String value) {
-     	    	ort = value;
-     	    }
+	public String getEmail() {
+		return email;
+	}
 
-         
-        // Kind: (value)
-
-
-     		@Basic
-     	    @Column(name = "STRASSE")
-     	    private String straße;
-
-
-     	    @Override
-			public String getStraße() {
-     	    	return straße;
-     	    }
-
-     	    @Override
-			public void setStraße(String value) {
-     	    	straße = value;
-     	    }
-
-         
-        // Kind: (value)
-
-
-     		@Basic
-     	    @Column(name = "TELEFON")
-     	    private String telefon;
-
-
-     	    @Override
-			public String getTelefon() {
-     	    	return telefon;
-     	    }
-
-     	    @Override
-			public void setTelefon(String value) {
-     	    	telefon = value;
-     	    }
-
-         
-        // Kind: (value)
-
-
-     		@Basic
-     	    @Column(name = "EMAIL")
-     	    private String email;
-
-
-     	    @Override
-			public String getEmail() {
-     	    	return email;
-     	    }
-
-     	    @Override
-			public void setEmail(String value) {
-     	    	email = value;
-     	    }
+	public void setEmail(String value) {
+		email = value;
+	}
 
 }
-

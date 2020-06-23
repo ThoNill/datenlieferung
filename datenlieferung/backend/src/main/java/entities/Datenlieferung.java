@@ -21,10 +21,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import interfaces.IDatenlieferung;
-import interfaces.IDatenlieferungProtokoll;
-import interfaces.IEingeleseneDatei;
-import interfaces.IRechnungAuftrag;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -39,7 +35,7 @@ import tho.nill.datenlieferung.simpleAttributes.MonatJahr;
 @Entity
 @Table(name = "DATENLIEFERUNG")
 @SequenceGenerator(name = "DATENLIEFERUNG_SEQ", sequenceName = "DATENLIEFERUNG_SEQ")
-public class Datenlieferung implements IDatenlieferung {
+public class Datenlieferung {
 
 	@EqualsAndHashCode.Include
 	@ToString.Include
@@ -376,14 +372,12 @@ public class Datenlieferung implements IDatenlieferung {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "Datenlieferung", orphanRemoval = true)
 	private Set<RechnungAuftrag> RechnungAuftrag = new HashSet<>();
 
-	@Override
-	public void addRechnungAuftrag(IRechnungAuftrag x) {
+	public void addRechnungAuftrag(RechnungAuftrag x) {
 		this.RechnungAuftrag.add((RechnungAuftrag) x);
 		x.setDatenlieferung(this);
 	}
 
-	@Override
-	public void removeRechnungAuftrag(IRechnungAuftrag x) {
+	public void removeRechnungAuftrag(RechnungAuftrag x) {
 		this.RechnungAuftrag.remove((RechnungAuftrag) x);
 		x.setDatenlieferung(null);
 	}
@@ -393,14 +387,12 @@ public class Datenlieferung implements IDatenlieferung {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "Datenlieferung", orphanRemoval = true)
 	private Set<DatenlieferungProtokoll> DatenlieferungProtokoll = new HashSet<>();
 
-	@Override
-	public void addDatenlieferungProtokoll(IDatenlieferungProtokoll x) {
+	public void addDatenlieferungProtokoll(DatenlieferungProtokoll x) {
 		this.DatenlieferungProtokoll.add((DatenlieferungProtokoll) x);
 		x.setDatenlieferung(this);
 	}
 
-	@Override
-	public void removeDatenlieferungProtokoll(IDatenlieferungProtokoll x) {
+	public void removeDatenlieferungProtokoll(DatenlieferungProtokoll x) {
 		this.DatenlieferungProtokoll.remove((DatenlieferungProtokoll) x);
 		x.setDatenlieferung(null);
 	}
@@ -412,14 +404,12 @@ public class Datenlieferung implements IDatenlieferung {
 			@JoinColumn(name = "DatenlieferungId") }, inverseJoinColumns = { @JoinColumn(name = "EingeleseneDateiId") })
 	private Set<EingeleseneDatei> EingeleseneDatei = new HashSet<>();
 
-	@Override
-	public void addEingeleseneDatei(IEingeleseneDatei x) {
+	public void addEingeleseneDatei(EingeleseneDatei x) {
 		this.EingeleseneDatei.add((EingeleseneDatei) x);
 		x.addDatenlieferung(this);
 	}
 
-	@Override
-	public void removeEingeleseneDatei(IEingeleseneDatei x) {
+	public void removeEingeleseneDatei(EingeleseneDatei x) {
 		this.EingeleseneDatei.remove((EingeleseneDatei) x);
 		x.removeDatenlieferung(this);
 	}
