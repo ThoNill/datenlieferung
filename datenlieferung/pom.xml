@@ -183,10 +183,17 @@
 		</dependency>
 
 		<dependency>
-			<groupId>bouncy</groupId>
-			<artifactId>cms</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcprov-jdk15on</artifactId>
+			<version>1.68</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcpkix-jdk15on</artifactId>
+			<version>1.68</version>
+		</dependency>
+
 
 		<dependency>
 			<groupId>com.jcraft</groupId>
@@ -233,6 +240,11 @@
 			<version>3.1</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.jacoco</groupId>
+			<artifactId>jacoco-maven-plugin</artifactId>
+			<version>0.8.5</version>
+		</dependency>
 
 	</dependencies>
 
@@ -326,7 +338,6 @@
 
 					</executions>
 				</plugin>
-
 			</plugins>
 		</pluginManagement>
 	</build>
