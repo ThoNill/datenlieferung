@@ -71,7 +71,9 @@ public class Dateien {
 			Files.createDirectories(p.getParent(), attrs);
 			return Files.createFile(p, attrs).toFile();
 		} else {
-			AclAttribute attrs = generateAclAttributes();
+
+			AclAttribute attrs = generateAclAttributes(p.getParent());
+
 			Files.createDirectories(p.getParent(), attrs);
 			return Files.createFile(p, attrs).toFile();
 		}
@@ -83,10 +85,9 @@ public class Dateien {
 		return PosixFilePermissions.asFileAttribute(perms);
 	}
 
-	private static AclAttribute generateAclAttributes() throws IOException {
-		String benutzer = System.getProperty("user.name");
-		UserPrincipal prinzipal = FileSystems.getDefault().getUserPrincipalLookupService()
-				.lookupPrincipalByName(benutzer);
+	private static AclAttribute generateAclAttributes(Path p) throws IOException {
+		p = firstExistingParentPath(p);
+		UserPrincipal prinzipal = Files.getOwner(p);
 		AclEntry entry = AclEntry.newBuilder().setType(AclEntryType.ALLOW).setPrincipal(prinzipal)
 				.setPermissions(AclEntryPermission.READ_ACL, AclEntryPermission.READ_DATA,
 						AclEntryPermission.READ_ATTRIBUTES, AclEntryPermission.READ_NAMED_ATTRS,
@@ -99,6 +100,14 @@ public class Dateien {
 		acl.add(0, entry);
 		return new AclAttribute(acl);
 
+	}
+
+	private static Path firstExistingParentPath(Path parent) {
+		Path p = parent;
+		while (!p.toFile().exists()) {
+			p = p.getParent();
+		}
+		return p;
 	}
 
 }
