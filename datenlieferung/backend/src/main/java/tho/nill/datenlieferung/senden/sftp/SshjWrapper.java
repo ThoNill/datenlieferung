@@ -30,7 +30,6 @@ public class SshjWrapper extends SftpBasisWrapper<RemoteResourceInfo> {
 			log.debug("vor SSHClient");
 			ssh = new SSHClient();
 			ssh.addHostKeyVerifier(new PromiscuousVerifier());
-			ssh.loadKnownHosts();
 			ssh.setConnectTimeout(2000);
 			ssh.setTimeout(2000);
 			log.debug("vor connect");
