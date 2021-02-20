@@ -27,7 +27,8 @@ public class Datenlieferung extends ObjectModell implements Aggregate, Entity{
 	public int transfernummer_vorprüfung;
 	public int korrekturnummer;
 	public int cdnummer;
-	public int par300Verbindung;
+	public int par300Verbindung; // Verbindung zwischen RECP/ABRP
+	public long originalID;
 	
 	public int fehler;
 	
