@@ -19,6 +19,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import lombok.ToString.Include;
 import tho.nill.datenlieferung.simpleAttributes.DatenArt;
 import tho.nill.datenlieferung.simpleAttributes.IK;
 import tho.nill.datenlieferung.simpleAttributes.MonatJahr;
@@ -114,7 +115,7 @@ public class RechnungAuftrag {
 	}
 
 	// Kind: (enumeration)
-
+	@Include
 	@Enumerated
 	@Column(name = "DATENART")
 	private DatenArt datenArt;

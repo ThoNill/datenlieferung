@@ -30,7 +30,7 @@ public class GenerateTestdatenService extends BasisService<DummyVoid> {
 	public EMailConfiguration configEMail;
 
 	private int rechnr = 1;
-	private DatenArt datenart = DatenArt.PAR300ABRP;
+	private DatenArt datenart = DatenArt.PAR300DATEN;
 	private int datenannahmeIk = 111111111;
 	private int prüfungsIk = 222222222;
 	private int versenderIk = 333333333;
@@ -44,7 +44,7 @@ public class GenerateTestdatenService extends BasisService<DummyVoid> {
 
 	@Override
 	public void performService(DummyVoid d) {
-		datenart = DatenArt.PAR300ABRP;
+		datenart = DatenArt.PAR300DATEN;
 		datenannahmeIk = 111111111;
 		prüfungsIk = 222222222;
 		versenderIk = 333333333;
@@ -87,7 +87,7 @@ public class GenerateTestdatenService extends BasisService<DummyVoid> {
 		Datenaustausch datenaustausch = new Datenaustausch();
 		datenaustausch.setDatenAnnahmeIK(new IK(datenannahmeIk));
 		datenaustausch.setDatenPrüfungsIK(new IK(prüfungsIk));
-		datenaustausch.setDatenArt(DatenArt.PAR300ABRP);
+		datenaustausch.setDatenArt(DatenArt.PAR300DATEN);
 		datenaustausch.setVerbindung(Verbindungsart.SFTP);
 		datenaustausch.setRichtung(Richtung.AUSGANG);
 		datenaustausch.setVersenderIK(new IK(versenderIk));
@@ -103,7 +103,7 @@ public class GenerateTestdatenService extends BasisService<DummyVoid> {
 		Datenaustausch datenaustausch = new Datenaustausch();
 		datenaustausch.setDatenAnnahmeIK(new IK(datenannahmeIk));
 		datenaustausch.setDatenPrüfungsIK(new IK(prüfungsIk));
-		datenaustausch.setDatenArt(DatenArt.PAR300ABRP);
+		datenaustausch.setDatenArt(DatenArt.PAR300DATEN);
 		datenaustausch.setVerbindung(Verbindungsart.EMAIL);
 		datenaustausch.setRichtung(Richtung.AUSGANG);
 		datenaustausch.setVersenderIK(new IK(versenderIk));

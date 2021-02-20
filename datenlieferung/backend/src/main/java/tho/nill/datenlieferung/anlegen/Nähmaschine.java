@@ -25,8 +25,11 @@ public class Nähmaschine implements Function<Object[], List<Datenlieferung>> {
 	private DatenlieferungRepository datenlieferungen;
 	private RechnungAuftragRepository aufträge;
 
+	private boolean mitRecpUndAbrpLieferung = false;
 	private Datenlieferung aktuelleDatenlieferung;
 	private Datenlieferung recpDatenlieferung;
+	private Datenlieferung abrpDatenlieferung;
+
 	private RechnungAuftrag letzterAuftrag;
 	private Status status;
 	private int cdNummer;
@@ -46,9 +49,9 @@ public class Nähmaschine implements Function<Object[], List<Datenlieferung>> {
 	public List<Datenlieferung> apply(@NonNull Object[] werte) {
 		anzahl++;
 		for (int i = 0; i < werte.length; i++) {
-			log.debug(" werte[" + i + "]=" + werte[i]);
+			log.info(" werte[" + i + "]=" + werte[i]);
 		}
-		log.debug("");
+		log.info("");
 		Long id = (Long) werte[0];
 		Optional<RechnungAuftrag> optionalAuftrag = aufträge.findById(id);
 		if (optionalAuftrag.isPresent()) {
@@ -87,14 +90,24 @@ public class Nähmaschine implements Function<Object[], List<Datenlieferung>> {
 	private List<Datenlieferung> bearbeiteAuftrag(RechnungAuftrag auftrag) {
 		status = bestimmeStatus(auftrag);
 
-		boolean mitRecpUndAbrpLieferung = DatenArt.PAR300DATEN.equals(auftrag.getDatenArt());
-
 		switch (status) {
 		case CD_BESTIMMEN:
 			cdNummer = neueMediumId(auftrag);
 		case NEUE_DATENLIEFERUNG:
+			log.info("Erzeuge neue Datenlieferung für Auftrag " + auftrag);
+			speichere(aktuelleDatenlieferung);
+			speichere(abrpDatenlieferung);
+			speichere(recpDatenlieferung);
+
+			aktuelleDatenlieferung = null;
+			abrpDatenlieferung = null;
+			recpDatenlieferung = null;
+
+			mitRecpUndAbrpLieferung = DatenArt.PAR300DATEN.equals(auftrag.getDatenArt());
+			log.info("mitRecpUndAbrpLieferung " + mitRecpUndAbrpLieferung);
 			if (mitRecpUndAbrpLieferung) {
 				par300Verbindung = nummernVergabe.getPar300Verbindung();
+				log.info("par300Verbindung " + par300Verbindung);
 			} else {
 				par300Verbindung = 0;
 			}
@@ -110,9 +123,13 @@ public class Nähmaschine implements Function<Object[], List<Datenlieferung>> {
 			recpAuftrag.setDatenArt(DatenArt.PAR300RECP);
 			recpDatenlieferung = jeNachStatusBearbeiten(recpDatenlieferung, recpAuftrag);
 			auftrag.setDatenArt(DatenArt.PAR300ABRP);
+			abrpDatenlieferung = jeNachStatusBearbeiten(abrpDatenlieferung, auftrag);
+			log.info("abrp " + abrpDatenlieferung);
+			log.info("recp " + recpDatenlieferung);
+		} else {
+			aktuelleDatenlieferung = jeNachStatusBearbeiten(aktuelleDatenlieferung, auftrag);
+			log.info("aktuell " + aktuelleDatenlieferung);
 		}
-
-		aktuelleDatenlieferung = jeNachStatusBearbeiten(aktuelleDatenlieferung, auftrag);
 
 		letzterAuftrag = copyAuftrag(auftrag);
 		if (mitRecpUndAbrpLieferung) {
@@ -123,7 +140,7 @@ public class Nähmaschine implements Function<Object[], List<Datenlieferung>> {
 			return Collections.emptyList();
 		} else {
 			if (mitRecpUndAbrpLieferung) {
-				return asList(aktuelleDatenlieferung, recpDatenlieferung);
+				return asList(abrpDatenlieferung, recpDatenlieferung);
 			} else {
 				return asList(aktuelleDatenlieferung);
 			}
@@ -144,12 +161,12 @@ public class Nähmaschine implements Function<Object[], List<Datenlieferung>> {
 		switch (status) {
 		case CD_BESTIMMEN:
 		case NEUE_DATENLIEFERUNG:
-			log.debug("Neue Datenlieferung mit CD Nummer " + cdNummer);
+			log.info("Neue Datenlieferung mit CD Nummer " + cdNummer);
 			speichere(datenlieferung);
 			return neueDatenlieferungErzeugen(auftrag);
 		case EINFÄDELN:
 			einfädeln(datenlieferung, auftrag);
-			log.debug("Einfädeln " + auftrag.getRechnungAuftragId() + " in Datenliefung "
+			log.info("Einfädeln " + auftrag.getRechnungAuftragId() + " in Datenliefung "
 					+ datenlieferung.getDatenlieferungId());
 			break;
 		}
@@ -158,7 +175,7 @@ public class Nähmaschine implements Function<Object[], List<Datenlieferung>> {
 
 	private Datenlieferung neueDatenlieferungErzeugen(RechnungAuftrag auftrag) {
 		Datenlieferung neueDatenlieferung = neueDatenlieferung(auftrag);
-		log.debug("Neue Datenlieferung " + neueDatenlieferung.getDatenlieferungId());
+		log.info("Neue Datenlieferung " + neueDatenlieferung.getDatenlieferungId());
 		einfädeln(neueDatenlieferung, auftrag);
 		return neueDatenlieferung;
 	}
@@ -166,12 +183,21 @@ public class Nähmaschine implements Function<Object[], List<Datenlieferung>> {
 	private Datenlieferung neueDatenlieferung(RechnungAuftrag auftrag) {
 		Datenlieferung d = createDatenlieferung(auftrag);
 		nummernVergabe.nummerieren(d);
-		datenlieferungen.save(d);
-		return d;
+		return saveDatenlieferung(d);
+	}
+
+	private Datenlieferung saveDatenlieferung(Datenlieferung d) {
+		Datenlieferung d2 = datenlieferungen.save(d);
+		if (d2.getOriginalID() == 0) {
+			d2.setOriginalID(d.getDatenlieferungId());
+			return datenlieferungen.save(d2);
+		}
+		return d2;
 	}
 
 	private Datenlieferung createDatenlieferung(RechnungAuftrag auftrag) {
 		Datenlieferung d = new Datenlieferung();
+
 		d.setLieferJahr(LocalDateTime.now().getYear());
 		d.setMj(auftrag.getMj());
 		d.setDatenArt(auftrag.getDatenArt());
@@ -184,13 +210,14 @@ public class Nähmaschine implements Function<Object[], List<Datenlieferung>> {
 			d.setPar300Verbindung(par300Verbindung);
 		}
 		d.setLetzteAktion(AktionsArt.ANGELEGT);
-		return datenlieferungen.save(d);
+		return saveDatenlieferung(d);
 	}
 
 	private void einfädeln(Datenlieferung datenlieferung, RechnungAuftrag auftrag) {
+		log.info("einfäderln datenlieferung " + datenlieferung);
 		datenlieferung.addRechnungAuftrag(auftrag);
 		aufträge.save(auftrag);
-		datenlieferungen.save(datenlieferung);
+		saveDatenlieferung(datenlieferung);
 	}
 
 	private int neueMediumId(RechnungAuftrag auftrag) {
@@ -200,7 +227,7 @@ public class Nähmaschine implements Function<Object[], List<Datenlieferung>> {
 
 	private void speichere(Datenlieferung datenlieferung) {
 		if (datenlieferung != null) {
-			datenlieferungen.save(datenlieferung);
+			saveDatenlieferung(datenlieferung);
 		}
 	}
 

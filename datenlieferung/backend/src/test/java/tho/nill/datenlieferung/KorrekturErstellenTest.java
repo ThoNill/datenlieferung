@@ -156,6 +156,8 @@ public class KorrekturErstellenTest {
 		datenlieferung.setTestKennzeichen("T");
 		datenlieferung.setLetzteAktion(AktionsArt.NUMMERIERT);
 
+		datenlieferung = datenlieferungenRepo.saveAndFlush(datenlieferung);
+		datenlieferung.setOriginalID(datenlieferung.getDatenlieferungId());
 		datenlieferungenRepo.saveAndFlush(datenlieferung);
 
 		ZertifikateLesen zl = new ZertifikateLesen(new File("src/test/resources/test-sha256.key").toPath(),

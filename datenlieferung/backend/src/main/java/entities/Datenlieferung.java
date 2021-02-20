@@ -24,6 +24,7 @@ import javax.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import lombok.ToString.Include;
 import tho.nill.datenlieferung.simpleAttributes.AktionsArt;
 import tho.nill.datenlieferung.simpleAttributes.DatenArt;
 import tho.nill.datenlieferung.simpleAttributes.IK;
@@ -120,7 +121,7 @@ public class Datenlieferung {
 	}
 
 	// Kind: (enumeration)
-
+	@Include
 	@Enumerated
 	@Column(name = "DATENART")
 	private DatenArt datenArt;
@@ -234,6 +235,20 @@ public class Datenlieferung {
 	// Kind: (value)
 
 	@Basic
+	@Column(name = "ORIGINALID")
+	private long originalID;
+
+	public long getOriginalID() {
+		return originalID;
+	}
+
+	public void setOriginalID(long value) {
+		originalID = value;
+	}
+
+	// Kind: (value)
+
+	@Basic
 	@Column(name = "FEHLER")
 	private int fehler;
 
@@ -325,7 +340,7 @@ public class Datenlieferung {
 	}
 
 	public void setErstellt(LocalDateTime value) {
-		erstellt = value.plusNanos(-value.getNano());
+		erstellt = value;
 	}
 
 	// Kind: (LocalDateTime)
@@ -373,12 +388,12 @@ public class Datenlieferung {
 	private Set<RechnungAuftrag> RechnungAuftrag = new HashSet<>();
 
 	public void addRechnungAuftrag(RechnungAuftrag x) {
-		this.RechnungAuftrag.add(x);
+		this.RechnungAuftrag.add((RechnungAuftrag) x);
 		x.setDatenlieferung(this);
 	}
 
 	public void removeRechnungAuftrag(RechnungAuftrag x) {
-		this.RechnungAuftrag.remove(x);
+		this.RechnungAuftrag.remove((RechnungAuftrag) x);
 		x.setDatenlieferung(null);
 	}
 
@@ -388,12 +403,12 @@ public class Datenlieferung {
 	private Set<DatenlieferungProtokoll> DatenlieferungProtokoll = new HashSet<>();
 
 	public void addDatenlieferungProtokoll(DatenlieferungProtokoll x) {
-		this.DatenlieferungProtokoll.add(x);
+		this.DatenlieferungProtokoll.add((DatenlieferungProtokoll) x);
 		x.setDatenlieferung(this);
 	}
 
 	public void removeDatenlieferungProtokoll(DatenlieferungProtokoll x) {
-		this.DatenlieferungProtokoll.remove(x);
+		this.DatenlieferungProtokoll.remove((DatenlieferungProtokoll) x);
 		x.setDatenlieferung(null);
 	}
 
@@ -405,13 +420,11 @@ public class Datenlieferung {
 	private Set<EingeleseneDatei> EingeleseneDatei = new HashSet<>();
 
 	public void addEingeleseneDatei(EingeleseneDatei x) {
-		this.EingeleseneDatei.add(x);
-		x.addDatenlieferung(this);
+		this.EingeleseneDatei.add((EingeleseneDatei) x);
 	}
 
 	public void removeEingeleseneDatei(EingeleseneDatei x) {
-		this.EingeleseneDatei.remove(x);
-		x.removeDatenlieferung(this);
+		this.EingeleseneDatei.remove((EingeleseneDatei) x);
 	}
 
 	public String getKennung() {
@@ -429,5 +442,4 @@ public class Datenlieferung {
 	public String getKomprimierung() {
 		return datenArt.komprimierung;
 	}
-
 }

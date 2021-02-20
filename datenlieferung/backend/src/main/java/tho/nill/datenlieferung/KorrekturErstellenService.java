@@ -44,12 +44,17 @@ public class KorrekturErstellenService extends BasisService<Long> {
 			Datenlieferung alteDatenlieferung = datenlieferungOpt.get();
 			int cdNummer = nummernVergabe.getNumber(DateiNummerArt.CD_NUMMER, DatenArt.CD_NUMMER,
 					alteDatenlieferung.getVersenderIK(), alteDatenlieferung.getVersenderIK(), 0);
+			if ("ABRP".equals(alteDatenlieferung.getDatenArt().verfahrensSpezifikation)
+					|| "RECP".equals(alteDatenlieferung.getDatenArt().verfahrensSpezifikation)) {
 
-			List<Datenlieferung> liste = datenlieferungRepo
-					.getDatenlieferungenZurVerbindung(alteDatenlieferung.getPar300Verbindung());
-			int neueVerbindungsNummer = nummernVergabe.getPar300Verbindung();
-			for (Datenlieferung datenlieferung : liste) {
-				eineDatenlieferungBearbeiten(datenlieferung, neueVerbindungsNummer, cdNummer);
+				List<Datenlieferung> liste = datenlieferungRepo
+						.getDatenlieferungenZurVerbindung(alteDatenlieferung.getPar300Verbindung());
+				int neueVerbindungsNummer = nummernVergabe.getPar300Verbindung();
+				for (Datenlieferung datenlieferung : liste) {
+					eineDatenlieferungBearbeiten(datenlieferung, neueVerbindungsNummer, cdNummer);
+				}
+			} else {
+				eineDatenlieferungBearbeiten(alteDatenlieferung, 0, cdNummer);
 			}
 		} else {
 			throw new DatenlieferungException("Keine Datenlieferung für id = " + id);
@@ -58,16 +63,18 @@ public class KorrekturErstellenService extends BasisService<Long> {
 	}
 
 	private void eineDatenlieferungBearbeiten(Datenlieferung alteDatenlieferung, int verbindungsNummer, int cdNummer) {
+		List<Datenlieferung> liste = datenlieferungRepo.getLetzteKorrektur(alteDatenlieferung.getOriginalID());
+		if (!liste.isEmpty()) {
+			Datenlieferung neueDatenlieferung = erzeugeDatenlieferung(liste.get(0), verbindungsNummer, cdNummer);
 
-		Datenlieferung neueDatenlieferung = erzeugeDatenlieferung(alteDatenlieferung, verbindungsNummer, cdNummer);
+			Set<RechnungAuftrag> alteListe = alteDatenlieferung.getRechnungAuftrag();
+			for (RechnungAuftrag a : alteListe) {
+				RechnungAuftrag na = erzeugeRechnungAuftrag(a);
+				neueDatenlieferung.addRechnungAuftrag(na);
+			}
 
-		Set<RechnungAuftrag> alteListe = alteDatenlieferung.getRechnungAuftrag();
-		for (RechnungAuftrag a : alteListe) {
-			RechnungAuftrag na = erzeugeRechnungAuftrag(a);
-			neueDatenlieferung.addRechnungAuftrag(na);
+			datenlieferungRepo.saveAndFlush(neueDatenlieferung);
 		}
-
-		datenlieferungRepo.saveAndFlush(neueDatenlieferung);
 	}
 
 	private RechnungAuftrag erzeugeRechnungAuftrag(RechnungAuftrag a) {
@@ -84,6 +91,7 @@ public class KorrekturErstellenService extends BasisService<Long> {
 			int cdNummer) {
 		Datenlieferung datenlieferung = new Datenlieferung();
 
+		datenlieferung.setOriginalID(alteDatenlieferung.getOriginalID());
 		datenlieferung.setPar300Verbindung(verbindungsNummer);
 		datenlieferung.setLieferJahr(LocalDateTime.now().getYear());
 		datenlieferung.setMj(alteDatenlieferung.getMj());
