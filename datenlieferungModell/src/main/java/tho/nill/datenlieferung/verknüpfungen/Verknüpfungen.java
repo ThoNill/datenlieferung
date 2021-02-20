@@ -11,9 +11,11 @@ import tho.nill.datenlieferung.simpleAttributes.FehlerMeldung;
 
 
 public class Verknüpfungen extends ObjectModell {
-	public Connection _auftrag = new Connection("one2many",Datenlieferung.class,RechnungAuftrag.class);
-	public Connection _protokoll = new Connection("one2many",Datenlieferung.class,DatenlieferungProtokoll.class);
-	public Connection _datei = new Connection("many2many",Datenlieferung.class,EingeleseneDatei.class);
+	
+	
+	public Connection _auftrag = new Connection(ONE2MANY,Datenlieferung.class,RechnungAuftrag.class);
+	public Connection _protokoll = new Connection(ONE2MANY,Datenlieferung.class,DatenlieferungProtokoll.class);
+	public Connection _datei = new Connection(MANY2MANY,Datenlieferung.class,EingeleseneDatei.class);
 
 	public Verknüpfungen() {
 		super();
