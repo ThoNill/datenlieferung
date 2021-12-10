@@ -21,7 +21,7 @@
 	</parent>
 
 	<properties>
-		<ssh.version>2.3.0</ssh.version> <!-- 0.10.1 -->
+		<ssh.version>2.7.0</ssh.version> <!-- 0.10.1 -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>11</java.version>
